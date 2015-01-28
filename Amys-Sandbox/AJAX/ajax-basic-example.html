@@ -4,6 +4,8 @@
 		<title> AJAX Basic </title>
 		<meta name="Author" content="Amy Norman">
 		<script type="text/javascript">
+			/* Note: AJAX examples only work from the browser. There is a link to a working example in the body below.
+			*/
 			function loadXMLDoc()
 			{
 				var xmlhttp;
@@ -11,8 +13,7 @@
 				  {// code for IE7+, Firefox, Chrome, Opera, Safari
 				  	xmlhttp=new XMLHttpRequest();
 				  	if (xmlhttp){
-				  		document.getElementById("error").innerHTML = "xmlhttp is set.";
-				  		window.alert(JSON.stringify(xmlhttp));
+				  		document.getElementById("error").innerHTML = "XMLHttpRequest works for this browser.";
 				  	}
 				  }
 				else
@@ -32,10 +33,14 @@
 		</script>
 	</head>
 	<body>
-		<h1> AJAX Basic Test </h1>
+		<h1> AJAX Basic Test (GET Request) </h1>
 		<div id="myDiv"><h2>Let AJAX change this text</h2></div>
 		<button type="button" onclick="loadXMLDoc()">Change Content</button>
 		<h2>Any messages will be displayed here</h2>
 		<p id="error"><p>
+		<h2>Example not working?</h2>
+		<p>
+			The example does not work on a locally run file because the XMLHTTPRequest must run through the browser. A running example can be found <a href="http://norman-amy.github.io/Amys-Sandbox/AJAX/ajax-basic-example.html" title="Working AJAX Example">here</a>.
+		</p>
 	</body>
 </html>

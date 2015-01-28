@@ -1,0 +1,118 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Input Animation</title>
+        <meta name="description" content="">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="cleartype" content="on">
+
+<!-- Link for Normalize -->
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.2/normalize.min.css">
+
+<!-- Inline CSS to make it one file -->
+<style type="text/css">
+section {
+  background: #2fa8ec;
+  font-size: 24px;
+  max-width: 400px;
+  margin: 20px auto;
+}
+.input {
+	position: relative;
+	z-index: 1;
+	display: inline-block;
+	margin: 1em;
+	max-width: 400px;
+	width: calc(100% - 2em);
+	vertical-align: top;
+  	overflow: hidden;
+}
+.input-field {
+  position: absolute;
+	z-index: 100;
+	padding: 2.15em 0.75em 0;
+	width: 100%;
+	background: transparent;
+	color: #1784cd;
+	font-size: 0.85em;
+	display: block;
+	float: right;
+	border: none;
+	border-radius: 0;
+	font-weight: bold;
+	-webkit-appearance: none; /* for box shadows to show on iOS */
+}
+.input-field:focus {
+	outline: none;
+}
+.input-label {
+  	padding: 0;
+	width: 100%;
+	height: 100%;
+	background: #fff;
+	text-align: left;
+	display: inline-block;
+	float: right;
+	color: #6a7989;
+	font-weight: bold;
+	font-size: 70.25%;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+.input-label-content {
+  	padding: 2em 1em;
+	-webkit-transform-origin: 0% 50%;
+	transform-origin: 0% 50%;
+	-webkit-transition: -webkit-transform 0.3s, color 0.3s;
+	transition: transform 0.3s, color 0.3s;
+	position: relative;
+	display: block;
+	width: 100%;
+}
+.input-label::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	border: 0px solid transparent;
+	-webkit-transition: border-width 0.3s, border-color 0.3s;
+	transition: border-width 0.3s, border-color 0.3s;
+}
+.input-field:focus + .input-label::before,
+.input-filled .input-label::before {
+	border-width: 0px;
+	border-color: #1784cd;
+	border-top-width: 2em;
+}
+.input-field:focus + .input-label .input-label-content,
+.input-filled .input-label .input-label-content {
+	color: #fff;
+	-webkit-transform: translate3d(0, -1.5em, 0) scale3d(0.75, 0.75, 1);
+	transform: translate3d(0, -1.5em, 0) scale3d(0.75, 0.75, 1) translateZ(1px);
+}
+</style>
+    </head>
+    <body>
+    
+		<section>
+        	<form>
+				<div class="input">
+					<input class="input-field" type="text" id="input-dollar-amount" />
+					<label class="input-label" for="input-dollar-amount">
+						<span class="input-label-content">Enter Dollar Amount</span>
+					</label>
+				</div>
+        	</form>
+		</section>
+		
+    </body>
+</html>
