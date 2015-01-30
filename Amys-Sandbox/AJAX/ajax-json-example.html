@@ -54,14 +54,16 @@
 				xmlhttp.onreadystatechange=function() {
 					if (xmlhttp.readyState==4 && xmlhttp.status==200) {
 				    	document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
-				    	document.getElementById("button").onclick="loadCar()";
-				    	document.getElementById("button").innerHTML="Load Car";
-
+				    	
 				    	//Add placeholder values to form
-				    	document.change.make.placeholder = car.make;
-						document.change.model.placeholder = car.model;
-						document.change.year.placeholder = car.year;
-						document.change.color.placeholder = car.color;
+				    	document.change.make.value = car.make;
+						document.change.model.value = car.model;
+						document.change.year.value = car.year;
+						document.change.color.value = car.color;
+
+						//Change button
+						document.getElementById("button").innerHTML="Save Changes";
+						document.getElementById("button").onclick=saveChanges;
 					}
 				}
 				xmlhttp.open("GET","ajax-json-form.html",true);
@@ -78,6 +80,8 @@
 				};
 
 				localStorage.setItem("car", JSON.stringify(car));
+
+				loadCar();
 			}
 		</script>
 	</head>
