@@ -34,12 +34,13 @@
 						+ "<tr><td>Color:</td><td>" + car.color + "</td></tr>"
 						+ "</table>";
 
-				document.getElementById("button").onclick="loadHTMLForm()";
 				document.getElementById("button").innerHTML="Change Car";
+				document.getElementById("button").onclick=loadHTMLForm;
 			}
 
 			//Use AJAX to open an HTML form
 			function loadHTMLForm(){
+				console.log("loading form...");
 				var car = JSON.parse(localStorage.getItem("car"));
 
 				var xmlhttp;
