@@ -1,0 +1,85 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Input Animation</title>
+        <meta name="description" content="">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="cleartype" content="on">
+
+<!-- Link for Normalize -->
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.2/normalize.min.css">
+
+<!-- Inline CSS to make it one file -->
+<style type="text/css">
+body {
+  max-width: 320px;
+  margin: 20px auto;
+}
+input {
+  width: 100%;
+  outline: none;
+  margin: 0 auto;
+  border: 0;
+  background: #ddd;
+  padding: 20px 0 20px 20px;
+  box-sizing: border-box;
+}
+button {
+  margin: 20px 0;
+  width: 100%;
+  padding: 20px 0;
+  outline: none;
+  border: none;
+  background: steelblue;
+  font-size: 24px;
+  color: white;
+  border-radius: 8px;
+}
+</style>
+
+<!-- Local Storage -->
+<script type="text/javascript">
+function storeValue() {
+  var lastName = document.getElementById("lastname").value;
+  
+  // Store
+  localStorage.lastname = lastName;
+  
+  // Retrieve
+  document.getElementById("result").innerHTML = "Your last name is " + lastName;
+}
+// local storage test
+function lsTest(){ 
+    var test = 'test';
+    try {
+      localStorage.setItem(test, test);
+      localStorage.removeItem(test);
+      return true;
+    } catch(e) {
+      return false;
+    }
+}
+var elem = document.getElementById('status');
+if(lsTest() === true){
+    elem.innerHTML += 'available.';
+}else{
+    elem.innerHTML += 'unavailable.';   
+}
+</script>
+
+    </head>
+    <body>
+    
+		<section>
+			<input id="lastname" placeholder="Enter Last Name">
+			<button onclick="storeValue()">Store Last Name</button>
+			<div id="result"></div>
+			<h3>Test if locale storage is available</h3>
+			<div id="status">Local Storage is </div>
+		</section>
+		
+    </body>
+</html>

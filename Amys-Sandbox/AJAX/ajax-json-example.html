@@ -4,8 +4,7 @@
 		<title> AJAX JSON example </title>
 		<meta name="Author" content="Amy Norman">
 		<script type="text/javascript">
-			/* Note: AJAX examples only work from the browser. There is a link to a working example in the body below.
-			*/
+			// Note: AJAX examples only work from the browser. There is a link to a working example in the body below.
 
 			//Load car from local storage (if it exists) or else load default values
 			function loadCar(){
@@ -65,7 +64,7 @@
 						document.getElementById("button").innerHTML="Save Changes";
 						document.getElementById("button").onclick=saveChanges;
 					}
-				}
+				};
 				xmlhttp.open("GET","ajax-json-form.html",true);
 				xmlhttp.send();
 			}
@@ -89,14 +88,14 @@
 		<h1> AJAX JSON and Local Storage Test </h1>
 		<div id="myDiv"><h2>Click the button to load the JSON object from local storage</h2></div>
 		<button type="button" id="button" onclick="loadCar()">Load Car</button>
-		
-
-
 
 		<div id="load">
 			<h2>Example not working?</h2>
 			<p>
-				The example does not work on a locally run file because the XMLHTTPRequest must run through the browser. A running example can be found <a href="http://norman-amy.github.io/Amys-Sandbox/AJAX/ajax-json-example.html" title="Working AJAX Example">here</a>.
+				The example does not work on a locally run file because the XMLHTTPRequest
+				must run through the browser. A running example can be found
+				<a href="http://norman-amy.github.io/Amys-Sandbox/AJAX/ajax-json-example.html"
+				   title="Working AJAX Example">here</a>.
 			</p>
 		</div>
 	</body>
