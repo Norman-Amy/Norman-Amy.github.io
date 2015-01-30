@@ -46,23 +46,23 @@ function storeValue() {
   var lastName = document.getElementById("lastname").value;
   
   // Store
-  localStorage.lastname = lastName;
+  localStorage.setItem('lastname', lastname);
   
   // Retrieve
-  document.getElementById("result").innerHTML = "Your last name is " + lastName;
+  document.getElementById("result").innerHTML = "Your last name is " + localStorage.getItem('lastname');
 }
 // local storage test
 function lsTest(){ 
     var test = 'test';
     try {
-      localStorage.setItem(test, test);
-      localStorage.removeItem(test);
+      localStorage.setItem('test', test);
+      localStorage.removeItem('test');
       return true;
     } catch(e) {
       return false;
     }
 }
-var elem = document.getElementById('status');
+var elem = document.getElementById("status");
 if(lsTest() === true){
     elem.innerHTML += 'available.';
 }else{
