@@ -20,7 +20,7 @@
 						, color: "Red"
 					};
 
-					localStorage.setItem("car");
+					localStorage.setItem("car", JSON.stringify(car));
 
 				}  else {
 					car = JSON.parse(localStorage.getItem("car"));
@@ -76,7 +76,7 @@
 					, color: document.change.color.value
 				};
 
-				localStorage.setItem("car", JSON.stringify())
+				localStorage.setItem("car", JSON.stringify(car));
 			}
 		</script>
 	</head>
