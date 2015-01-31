@@ -46,10 +46,10 @@ function storeValue() {
   var lastName = document.getElementById("lastname").value;
   
   // Store
-  localStorage.setItem('lastname', lastname);
+  localStorage.lastName = lastName;
   
   // Retrieve
-  document.getElementById("result").innerHTML = "Your last name is " + localStorage.getItem('lastname');
+  document.getElementById("result").innerHTML = "Your last name is " + localStorage.lastName;
 }
 // local storage test
 function lsTest(){ 
@@ -62,12 +62,18 @@ function lsTest(){
       return false;
     }
 }
+
+//This element cannot be seen until after the button is pushed
 var elem = document.getElementById("status");
 if(lsTest() === true){
     elem.innerHTML += 'available.';
 }else{
     elem.innerHTML += 'unavailable.';   
 }
+
+
+//Check to see if localStorage item loads initially
+document.getElementById("result").innerHTML = localStorage.lastName;
 </script>
 
     </head>
@@ -76,7 +82,7 @@ if(lsTest() === true){
 		<section>
 			<input id="lastname" placeholder="Enter Last Name">
 			<button onclick="storeValue()">Store Last Name</button>
-			<div id="result"></div>
+			<div id="result">hi</div>
 			<h3>Test if locale storage is available</h3>
 			<div id="status">Local Storage is </div>
 		</section>
