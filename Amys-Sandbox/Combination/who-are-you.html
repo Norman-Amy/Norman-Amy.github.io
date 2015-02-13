@@ -68,14 +68,16 @@
 			
 
 			function calculate(){
+				var fname = document.getElementById("fnameMood").value;
+				var lname = document.getElementById("lnameMood").value;
+				var moody = document.getElementById("mood").value
+
+
 				var person = {
-					first: document.getElementById("fnameMood").value,
-					last: document.getElementById("lnameMood").value,
-					mood: document.getElementById("mood").value
+					first: fname,
+					last: lname,
+					mood: moody
 				};
-				console.log(document.getElementById("fnameMood").value + 
-					" " + document.getElementById("lnameMood").value +
-					" " + document.getElementById("mood").value)
 
 				localStorage.setItem(combineNames(fname, lname), JSON.stringify(person));
 
