@@ -42,7 +42,8 @@
 			function loadHTMLForm(name){
 
 				var person = JSON.parse(localStorage.getItem(name));
-
+				console.log(person.fname);
+				console.log(JSON.stringify(person));
 				var xmlhttp;
 				if (window.XMLHttpRequest){
 					// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -59,8 +60,8 @@
 				    	document.getElementById("lnameMood").value = person.lname;
 
 						//Change button
-						// document.getElementById("button").innerHTML="Save Changes";
-						// document.getElementById("button").onclick=saveChanges;
+						document.getElementById("button").innerHTML="Next";
+						document.getElementById("button").onclick=calculate;
 					}
 				};
 				xmlhttp.open("GET","ajax-form.html",true);
@@ -107,10 +108,9 @@
 				<input type="text" name="fname" id="fname"/>
 				<label for="lname">Last Name:</label>
 				<input type="text" name="lname" id="lname"/>
-				<button type="button" id="button" onclick="loadScreen2()">Next</button>
 			</form>
 		</div>
-		
+		<button type="button" id="button" onclick="loadScreen2()">Next</button>
 
 
 
