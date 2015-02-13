@@ -10,8 +10,8 @@
 			function loadScreen2(){
 				var fname = document.getElementById('fname').value;
 				var lname = document.getElementById('lname').value;
-				console.log(fname + " " + lname);
-				var person = loadPerson(name);
+
+				var person = loadPerson(fname, lname);
 				loadHTMLForm(person);
 			}
 
@@ -26,7 +26,7 @@
 				if (!localStorage.getItem(name)){
 					localStorage.setItem(name, JSON.stringify(person));
 				} else {
-					person = localStorage.getItem(name);
+					person = JSON.parse(localStorage.getItem(name));
 				}
 				console.log(JSON.stringify(person));
 
@@ -76,7 +76,7 @@
 				console.log(document.getElementById("fnameMood").value + 
 					" " + document.getElementById("lnameMood").value +
 					" " + document.getElementById("mood").value)
-				
+
 				localStorage.setItem(combineNames(fname, lname), JSON.stringify(person));
 
 				var img;
