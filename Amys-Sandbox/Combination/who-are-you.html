@@ -3,6 +3,8 @@
 	<head>
 		<title> AJAX JSON example </title>
 		<meta name="Author" content="Amy Norman">
+
+		<link rel="stylesheet" href="who-are-you.css"/>
 		<script type="text/javascript">
 			// Note: AJAX examples only work from the browser. There is a link to a working example in the body below.
 
@@ -98,6 +100,32 @@
 
 				document.getElementById("myDiv").innerHTML = img;
 
+				startTimer(person);
+			}
+
+			function startTimer(person){
+				//This will load the next screen after 3 seconds
+				window.setTimeout(loadScreen3(person), 3000)
+			}
+
+			function loadScreen3(person){
+				var div = document.getElementById("myDiv");
+				switch(person.mood)
+				{
+					case "happy": 
+						div.innerHTML = "<p>" +
+							"Thank you, " + person.first + "!</p>";
+						break;
+					case "sad":
+						div.innerHTML = "<p>" +
+							"Don't be sad, " + person.first + "!</p>";
+						break;
+					case "batman":
+						div.innerHTML = "<p>" +
+							"Good to see you, Mr. Wayne.</p>";
+						break;
+				}
+
 			}
 
 		</script>
@@ -111,9 +139,10 @@
 				<input type="text" name="fname" id="fname"/>
 				<label for="lname">Last Name:</label>
 				<input type="text" name="lname" id="lname"/>
+				<button type="button" id="button" onclick="loadScreen2()">Next</button>
 			</form>
 		</div>
-		<button type="button" id="button" onclick="loadScreen2()">Next</button>
+		
 
 
 
