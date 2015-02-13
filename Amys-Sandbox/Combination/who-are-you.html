@@ -105,10 +105,11 @@
 
 			function startTimer(person){
 				//This will load the next screen after 3 seconds
-				setTimeout(function(){loadScreen3(person);}, 5000)
+				setTimeout(function(person){loadScreen3(person);}, 5000)
 			}
 
 			function loadScreen3(person){
+				console.log("Loading...");
 				var div = document.getElementById("myDiv");
 				switch(person.mood)
 				{
