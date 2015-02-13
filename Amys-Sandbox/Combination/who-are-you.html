@@ -19,8 +19,8 @@
 			function loadPerson(fname, lname){
 				var name = combineNames(fname, lname);
 				var person = {
-					'fname': fname,
-					'lname': lname
+					first: fname,
+					last: lname
 				};
 
 				if (!localStorage.getItem(name)){
@@ -54,8 +54,8 @@
 					if (xmlhttp.readyState==4 && xmlhttp.status==200) {
 				    	document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
 
-				    	document.getElementById("fnameMood").value = person.fname;
-				    	document.getElementById("lnameMood").value = person.lname;
+				    	document.getElementById("fnameMood").value = person.first;
+				    	document.getElementById("lnameMood").value = person.last;
 
 						//Change button
 						document.getElementById("button").innerHTML="Next";
@@ -69,11 +69,14 @@
 
 			function calculate(){
 				var person = {
-					'fname': document.getElementById("fnameMood").value,
-					'lname': document.getElementById("lnameMood").value,
-					'mood': document.getElementById("mood").value
+					first: document.getElementById("fnameMood").value,
+					last: document.getElementById("lnameMood").value,
+					mood: document.getElementById("mood").value
 				};
-
+				console.log(document.getElementById("fnameMood").value + 
+					" " + document.getElementById("lnameMood").value +
+					" " + document.getElementById("mood").value)
+				
 				localStorage.setItem(combineNames(fname, lname), JSON.stringify(person));
 
 				var img;
