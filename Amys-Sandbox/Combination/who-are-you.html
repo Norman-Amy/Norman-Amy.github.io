@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> AJAX JSON example </title>
+		<meta name="Author" content="Amy Norman">
+		<script type="text/javascript">
+			// Note: AJAX examples only work from the browser. There is a link to a working example in the body below.
+
+
+			function loadScreen2(){
+				var fname = document.getElementById('fname').value;
+				var lname = document.getElementById('lname').value;
+				var person = loadPerson(name);
+				var name = combineNames(fname, lname);
+				loadHTMLForm(name);
+			}
+
+
+			function loadPerson(fname, lname){
+				var name = combineNames(fname, lname);
+				var person = {
+					'fname': fname,
+					'lname': lname
+				};
+
+				if (!localStorage.getItem(name)){
+					localStorage.setItem(name, JSON.stringify(person));
+				} else {
+					person = localStorage.getItem(name);
+				}
+
+				return person;
+			}
+
+
+			function combineNames(fname, lname){
+				return fname + " " + lname;
+			}
+
+
+			//Use AJAX to open an HTML form
+			function loadHTMLForm(name){
+
+				var person = JSON.parse(localStorage.getItem(name));
+
+				var xmlhttp;
+				if (window.XMLHttpRequest){
+					// code for IE7+, Firefox, Chrome, Opera, Safari
+				  	xmlhttp=new XMLHttpRequest();
+				} else {
+					// code for IE6, IE5
+				  	xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+				}
+				xmlhttp.onreadystatechange=function() {
+					if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+				    	document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+
+				    	document.getElementById("fnameMood").value = person.fname;
+				    	document.getElementById("lnameMood").value = person.lname;
+
+						//Change button
+						// document.getElementById("button").innerHTML="Save Changes";
+						// document.getElementById("button").onclick=saveChanges;
+					}
+				};
+				xmlhttp.open("GET","ajax-form.html",true);
+				xmlhttp.send();
+			}
+			
+
+			function calculate(){
+				var person = {
+					'fname': document.getElementById("fnameMood").value,
+					'lname': document.getElementById("lnameMood").value,
+					'mood': document.getElementById("mood").value
+				};
+
+				localStorage.setItem(combineNames(fname, lname), JSON.stringify(person));
+
+				var img;
+
+				switch (person.mood)
+				{
+					case "happy":
+						img = "<img src='smiles.png' class='loading' alt='Happy Face'/>";
+						break;
+					case "sad":
+						img = "<img src='smiles.png' class='loading' alt='Sad Face'/>";
+						break;
+					case "batman":
+						img = "<img src='batman.png' class='loading' alt='Batman'/>";
+						break;
+				}
+
+				document.getElementById("myDiv").innerHTML = img;
+
+			}
+
+		</script>
+	</head>
+	<body>
+		<h1> Welcome </h1>
+		<div id="myDiv">
+			<h2>What is your name?</h2>
+			<form name="name">
+				<label for="fname">First Name:</label>
+				<input type="text" name="fname" id="fname"/>
+				<label for="lname">Last Name:</label>
+				<input type="text" name="lname" id="lname"/>
+				<button type="button" id="button" onclick="loadScreen2()">Next</button>
+			</form>
+		</div>
+		
+
+
+
+		<div id="load">
+			<h2>Example not working?</h2>
+			<p>
+				The example does not work on a locally run file because the XMLHTTPRequest
+				must run through the browser. A running example can be found
+				<a href="http://norman-amy.github.io/Amys-Sandbox/Combination/who-are-you.html"
+				   title="Working AJAX Example">here</a>.
+			</p>
+		</div>
+	</body>
+</html>
