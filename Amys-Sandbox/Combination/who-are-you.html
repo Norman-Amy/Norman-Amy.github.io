@@ -11,8 +11,7 @@
 				var fname = document.getElementById('fname').value;
 				var lname = document.getElementById('lname').value;
 				var person = loadPerson(name);
-				var name = combineNames(fname, lname);
-				loadHTMLForm(name);
+				loadHTMLForm(person);
 			}
 
 
@@ -25,9 +24,10 @@
 
 				if (!localStorage.getItem(name)){
 					localStorage.setItem(name, JSON.stringify(person));
-				} else {
-					person = localStorage.getItem(name);
-				}
+				} 
+				
+				person = localStorage.getItem(name);
+				console.log(JSON.stringify(person));
 
 				return person;
 			}
@@ -39,11 +39,8 @@
 
 
 			//Use AJAX to open an HTML form
-			function loadHTMLForm(name){
+			function loadHTMLForm(person){
 
-				var person = JSON.parse(localStorage.getItem(name));
-				console.log(person.fname);
-				console.log(JSON.stringify(person));
 				var xmlhttp;
 				if (window.XMLHttpRequest){
 					// code for IE7+, Firefox, Chrome, Opera, Safari
