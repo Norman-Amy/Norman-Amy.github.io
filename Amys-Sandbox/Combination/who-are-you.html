@@ -100,12 +100,12 @@
 
 				document.getElementById("myDiv").innerHTML = img;
 
-				// startTimer(person);
+				startTimer(person);
 			}
 
 			function startTimer(person){
 				//This will load the next screen after 3 seconds
-				setTimeout(function(person){loadScreen3(person);}, 5000)
+				setTimeout(function(){loadScreen3(person);}, 5000)
 			}
 
 			function loadScreen3(person){
