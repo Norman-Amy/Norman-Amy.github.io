@@ -10,6 +10,7 @@
 			function loadScreen2(){
 				var fname = document.getElementById('fname').value;
 				var lname = document.getElementById('lname').value;
+				console.log(fname + " " + lname);
 				var person = loadPerson(name);
 				loadHTMLForm(person);
 			}
@@ -24,9 +25,9 @@
 
 				if (!localStorage.getItem(name)){
 					localStorage.setItem(name, JSON.stringify(person));
-				} 
-				
-				person = localStorage.getItem(name);
+				} else {
+					person = localStorage.getItem(name);
+				}
 				console.log(JSON.stringify(person));
 
 				return person;
