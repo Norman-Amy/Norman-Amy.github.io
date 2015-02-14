@@ -6,30 +6,34 @@ body {
 }
 
 #button {
-	-webkit-transition-property: width; /* Safari */
+	-webkit-transition-property: border; /* Safari */
     -webkit-transition-duration: 2s; /* Safari */
-    transition-property: width;
+    transition-property: border;
     transition-duration: 2s;
 }
 
 
 #button:active {
-	width:200px;
+	width:150px;
 }
 
 .loading {
-	-webkit-animation: slide 10s infinite ease; /* Chrome, Safari, Opera */
-    animation: slide 10s infinite ease;
+	width: 100px;
+	-webkit-animation: rotate 3s infinite linear;
+	animation: rotate 3s infinite linear;
 }
 
 /* Chrome, Safari, Opera */
-@-webkit-keyframes slide {
-    from  {visibility: visible; left:-150px; top:0px;}
-    to {left:150px; top:0px; visibility: hidden;}
+@-webkit-keyframes rotate {
+    0% { -webkit-transform: rotate(0deg); }
+    50% { -webkit-transform: rotate(180deg); }
+   100% { -webkit-transform: rotate(360deg); }
 }
 
 /* Standard syntax */
-@keyframes slide {
-    from  {visibility: visible; left:-150px; top:0px;}
-    to {left:150px; top:0px; visibility: hidden;}
+@keyframes rotate {
+    0% { -webkit-transform: rotate(0deg); }
+    50% { -webkit-transform: rotate(180deg); }
+   100% { -webkit-transform: rotate(360deg); }
 }
+
