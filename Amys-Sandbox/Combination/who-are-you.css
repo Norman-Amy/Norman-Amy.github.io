@@ -4,3 +4,32 @@ body {
 	font-size: 12pt;
 	text-align:center;
 }
+
+#button {
+	-webkit-transition-property: width; /* Safari */
+    -webkit-transition-duration: 2s; /* Safari */
+    transition-property: width;
+    transition-duration: 2s;
+}
+
+
+#button:active {
+	width:200px;
+}
+
+.loading {
+	-webkit-animation: slide 10s infinite ease; /* Chrome, Safari, Opera */
+    animation: slide 10s infinite ease;
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes slide {
+    from  {visibility: visible; left:-150px; top:0px;}
+    to {left:150px; top:0px; visibility: hidden;}
+}
+
+/* Standard syntax */
+@keyframes slide {
+    from  {visibility: visible; left:-150px; top:0px;}
+    to {left:150px; top:0px; visibility: hidden;}
+}

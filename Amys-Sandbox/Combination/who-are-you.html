@@ -25,6 +25,7 @@
 					last: lname
 				};
 
+				//If person doesn't excist, create one, otherwise open the existing one
 				if (!localStorage.getItem(name)){
 					localStorage.setItem(name, JSON.stringify(person));
 				} else {
@@ -81,6 +82,7 @@
 					mood: moody
 				};
 
+				//Save changes to local storage
 				localStorage.setItem(combineNames(fname, lname), JSON.stringify(person));
 
 				var img;
@@ -98,19 +100,23 @@
 						break;
 				}
 
+				//Change the view to the spinning image
 				document.getElementById("myDiv").innerHTML = img;
 
+				// Start a timer to finish the program
 				startTimer(person);
 			}
 
+
 			function startTimer(person){
 				//This will load the next screen after 3 seconds
-				setTimeout(function(){loadScreen3(person);}, 5000)
+				setTimeout(function(){loadScreen3(person);}, 3000)
 			}
 
+
 			function loadScreen3(person){
-				console.log("Loading...");
 				var div = document.getElementById("myDiv");
+
 				switch(person.mood)
 				{
 					case "happy": 
@@ -142,19 +148,6 @@
 				<input type="text" name="lname" id="lname"/>
 				<button type="button" id="button" onclick="loadScreen2()">Next</button>
 			</form>
-		</div>
-		
-
-
-
-		<div id="load">
-			<h2>Example not working?</h2>
-			<p>
-				The example does not work on a locally run file because the XMLHTTPRequest
-				must run through the browser. A running example can be found
-				<a href="http://norman-amy.github.io/Amys-Sandbox/Combination/who-are-you.html"
-				   title="Working AJAX Example">here</a>.
-			</p>
 		</div>
 	</body>
 </html>
