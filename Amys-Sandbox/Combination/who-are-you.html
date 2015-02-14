@@ -31,7 +31,6 @@
 				} else {
 					person = JSON.parse(localStorage.getItem(name));
 				}
-				console.log(JSON.stringify(person));
 
 				return person;
 			}
@@ -73,17 +72,22 @@
 			function calculate(){
 				var fname = document.getElementById("fnameMood").value;
 				var lname = document.getElementById("lnameMood").value;
-				var moody = document.getElementById("mood").value
+				var moody = document.getElementById("mood").value;
+				var name = combineNames(fname, lname);
 
 
-				var person = {
-					first: fname,
-					last: lname,
-					mood: moody
-				};
+				var person = JSON.parse(localStorage.getItem(name));
+
+				//If it exists, save the last mood
+				if (person.mood){
+					person.lastMood = person.mood;
+				}
+
+				// Save the new mood as current
+				person.mood = moody;
 
 				//Save changes to local storage
-				localStorage.setItem(combineNames(fname, lname), JSON.stringify(person));
+				localStorage.setItem(name, JSON.stringify(person));
 
 				var img;
 
@@ -134,6 +138,10 @@
 						break;
 				}
 
+				if (person.lastMood){
+					div.innerHTML += "<p> Last time you were here, your mood was: " 
+						+ person.lastMood + ". We hope your mood is improving!</p>";
+				}
 			}
 
 		</script>
