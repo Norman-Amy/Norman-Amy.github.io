@@ -101,7 +101,8 @@
 				}
 
 				//Change the view to the spinning image
-				document.getElementById("myDiv").innerHTML = img;
+				document.getElementById("myDiv").innerHTML = img 
+					+ "<h2>Calculating...</h2>";
 
 				// Start a timer to finish the program
 				startTimer(person);
@@ -143,9 +144,9 @@
 			<h2>What is your name?</h2>
 			<form name="name">
 				<label for="fname">First Name:</label>
-				<input type="text" name="fname" id="fname"/>
+				<input type="text" name="fname" id="fname"/><br/>
 				<label for="lname">Last Name:</label>
-				<input type="text" name="lname" id="lname"/>
+				<input type="text" name="lname" id="lname"/><br/>
 				<button type="button" id="button" onclick="loadScreen2()">Next</button>
 			</form>
 		</div>
