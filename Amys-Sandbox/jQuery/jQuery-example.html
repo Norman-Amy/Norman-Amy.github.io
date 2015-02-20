@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> jQuery Example </title>
+		<meta name="Author" content="Amy Norman">
+		<!-- Import the jQuery library -->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<script src="http://jqueryvalidation.org/files/dist/jquery.validate.min.js"></script>
+		<script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>
+		<script>
+
+		// W3Schools Example
+		$(document).ready(function(){
+		   $("p").click(function(){
+		        $(this).hide();
+		    }); 
+		});
+
+		//Form checker
+		$(function(){
+			$("#form1").validate({
+				rules: {
+					name: {
+						required: true,
+						minlength: 3
+					},
+					age: {
+						required: true,
+						minlength: 1,
+						range: [1, 100]
+					},
+					email: {
+						email: true,
+						required: true
+					}
+				},
+				messages: {
+					name: {
+						required: "Please enter your name.",
+						minlength: "Name must be longer than 3 characters."
+					},
+					age: {
+						required: "Please enter your age.",
+						minlength: "Age must be at least one character",
+						range: "Please enter a number between 1 and 100"
+					},
+					email: {
+						email: "Please enter a valid email",
+						required: "Yes, email is required too."
+					}
+				}
+			});
+
+			$("#submit").click(function(){
+	            $("#form1").submit();
+	            return false;
+	        });
+		});
+
+		//Make an AJAX request using JQuery
+		$(document).ready(function(){
+			$("button").click(function(){
+				$("#ajax1").load("jquery-ajax-demo.txt");
+			});
+		});
+
+		//Warn user if they aren't in a browser
+		$(document).ready(function(){
+			if(window.location.href.indexOf("file") > -1) {
+				$("#error").replaceWith("<h2 style='color:red'>Please open this file in a browser to run the AJAX Example</h2>"
+					+ "<a href='Norman-Amy.github.io/Amys-Sandbox/jQuery/jQuery-example.html'>"
+					+ "Norman-Amy.github.io/Amys-Sandbox/jQuery/jQuery-example.html"
+					+ "</a>"
+					);
+			}
+		})
+
+		</script>
+	</head>
+	<body>
+		<h1> JQuery Examples </h1>
+
+		<section>
+			<h2> W3Schools Example </h2>
+			<p>If you click on me, I will disappear.</p>
+			<p>Click me away!</p>
+			<p>Click me too!</p>
+		</section>
+		
+		<section>
+			<h2> Form Validation </h2>
+			<form id="form1">
+				<label for="name">Name:</label>
+				<input type="text" id="name" name="name"/>
+				<br>
+				<label for="age">Age:</label>
+				<input type="text" id="age" name="age"/>
+				<br>
+				<label for="email">Email:</label>
+				<input type="text" id="email" name="email"/>
+				<br>
+				<input type="button" id="submit" name="submit" value="Submit"/>
+			</form>
+		</section>
+
+		<section>
+			<p id="error"></p>
+			<div id="ajax1">
+				<h2> JQuery AJAX Request </h2>
+				<p>Click the button below to watch this content change</p>
+				<button>Make Request</button>
+			</div>
+		</section>
+
+	</body>
+</html>
