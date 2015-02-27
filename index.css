@@ -1,23 +1,38 @@
+html {
+	min-height: 100%;
+}
+
 body {
 	padding: 15px;
 	font-family: "Verdana", "Helvetica", "Tahoma";
 	max-width: 800px;
 	overflow:hidden;
+	margin-bottom:-900px;
 }
 
 #content {
 	z-index:30;
 	padding:15px;
 	border: solid thin #A3C63C;
+	border-radius:20px;
+	background-color:#FFFFFF;
+	background:transparent;
+	/* Fallback for web browsers that don't support RGBa */
+    background-color: rgb(255, 255, 255);
+    /* RGBa with 0.3 opacity */
+    background-color: rgba(255, 255, 255, .3);
 }
+
+
 
 #background img {
 	position: absolute;
-	right: -600px;
+	right:-600px;
+	top: 400px;
 	-webkit-transform:rotate(-50deg);
 	-mozilla-transform:rotate(-50deg);
-	top: 75%;
 	z-index:-1;
+	overflow:hidden;
 }
 
 
