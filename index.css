@@ -11,13 +11,12 @@ body {
 	border: solid thin #A3C63C;
 }
 
-#background {
-	background-image:url('/HappyAndroid.png');
+#background img {
 	position: absolute;
-	right: -400px;
+	right: -600px;
 	-webkit-transform:rotate(-50deg);
 	-mozilla-transform:rotate(-50deg);
-	bottom: -1000px;
+	top: 75%;
 	z-index:-1;
 }
 
