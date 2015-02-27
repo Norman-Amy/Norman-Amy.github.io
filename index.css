@@ -2,8 +2,25 @@ body {
 	padding: 15px;
 	font-family: "Verdana", "Helvetica", "Tahoma";
 	max-width: 800px;
-	border: thin green solid;
+	overflow:hidden;
 }
+
+#content {
+	z-index:30;
+	padding:15px;
+	border: solid thin #A3C63C;
+}
+
+#background {
+	background-image:url('/HappyAndroid.png');
+	position: absolute;
+	right: -400px;
+	-webkit-transform:rotate(-50deg);
+	-mozilla-transform:rotate(-50deg);
+	bottom: -1000px;
+	z-index:-1;
+}
+
 
 h1,h2,h3 {
 	font-family: "Cooper", "Georgia", "Times New Roman";
