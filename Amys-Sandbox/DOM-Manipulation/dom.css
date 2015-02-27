@@ -1,0 +1,22 @@
+body {
+	padding: 15px;
+	font-family: "Verdana", "Helvetica", "Tahoma";
+}
+
+h1, h2, h3 {
+	font-family: "cooper", "Georgia", "Times New Roman";
+	padding-top: 15px;
+}
+
+section {
+	padding:0px 15px;
+}
+
+pre {
+	border: solid black thin;
+	padding: 15px;
+	background-color:#a3c63c;
+	max-width:800px;
+
+}
+

@@ -3,10 +3,53 @@
 	<head>
 		<title> DOM Manipulation </title>
 		<meta name="Author" content="Amy Norman">
+		<link rel="stylesheet" href="dom.css"/>
 		<script type="text/javascript">
 			function changeGoButton(){
-				window.alert(document.getElementByID("goButton").value);
-				document.getElementByID("goButton").value = "Stop";
+				if (document.getElementById("goButton").value == "Go")
+					document.getElementById("goButton").value = "Stop";
+				else
+					document.getElementById("goButton").value = "Go";
+			}
+
+			function letsDoMath(){
+				// Grab the values and convert them into integers
+				var num1 = parseInt(document.myForm.num1.value);
+				var num2 = parseInt(document.myForm.num2.value);
+
+				// Add and save results into input box
+				document.myForm.answer.value = num1 + num2;
+			}
+
+			function changeInnerHTML(){
+				document.getElementById("innerHTML").innerHTML = "Goodbye!";
+			}
+
+			function changeCSS(){
+				document.getElementById("changeText").style.color = "blue";
+				document.getElementById("changeButton").style.width = "200px";
+			}
+
+			function createInput(){
+				//Create the input
+				var input = document.createElement("INPUT");
+				// Insert it into the form
+				document.createInputForm.appendChild(input);
+			}
+
+			function removeInput(){
+				var parent = document.createInputForm;
+				document.createInputForm.removeChild(parent.firstChild);
+			}
+
+			function getLastModified(){
+				var modified = document.lastModified;
+				document.getElementById("modified").innerHTML = modified;
+			}
+
+			function getURL(){
+				var url = document.URL;
+				document.getElementById("url").innerHTML = url;
 			}
 		</script>
 	</head>
@@ -19,39 +62,217 @@
 		<h1> DOM Manipulation </h1>
 		<p> DOM or Document Object Model, is used to traverse the HTML elements on a webpage. These simple examples are here to show the different ways we can manipulate the DOM. <p>
 
+
+		<h2> Changing the Elements </h2>
 	    <section>
-	    	<h2>GetElementByID()</h2>
+	    	<h3>getElementById()</h3>
 	    	<p>This built in function allows you to select an element based on its id attribute. For example, the following button value can be changed from "Go" to "Stop" by selecting its unique id of "goButton".</p>
 	    	<input type="button" value="Go" id="goButton" onclick="changeGoButton()"/>
+	    	<p>Here's the HTML:</p>
+	    	<pre>
+&lt;input type="button" value="Go" id="goButton" onclick="changeGoButton()"&sol;&gt;
+	    	</pre>
 	    	<p>Here is the JavaScript code:</p>
 	    	<pre>
 &lt;script type="text/javascript"&gt;
-	document.getElementByID("goButton").value = "Stop";
+	function changeGoButton(){
+		if (document.getElementById("goButton").value == "Go")
+			document.getElementById("goButton").value = "Stop";
+		else
+			document.getElementById("goButton").value = "Go";
+	}
 &lt;&sol;script&gt;
 	    	</pre>
 	    </section>
 
+
+
 	    <section>
-	    	<h2></h2>
-	    	<p></p>
-	    	<button type="button" onclick="" value="Go"></button>
+	    	<h3>Selecting by Name</h3>
+	    	<p>Besides selecting a unique element by Id, we can also grab an element by following the document structure. The following form allows us to do addition by selecting the values based on their name attributes "num1" and "num2". Then we will output to the third input box named "answer".</p>
+	    	<form name="myForm">
+	    		Number 1:<input type="text" name="num1"/><br>
+	    		Number 2:<input type="text" name="num2"/><br>
+	    		<input type="button" value="Add" name="add" onclick="letsDoMath()"/><br>
+	    		Answer:<input type="text" name="answer"/>
+	    	</form>
+
+	    	<p>Here's the HTML:</p>
+	    	<pre>
+&lt;form name="myForm"&gt;
+	Number 1:&lt;input type="text" name="num1"&sol;&gt;&lt;br&gt;
+	Number 2:&lt;input type="text" name="num2"&sol;&gt;&lt;br&gt;
+	&lt;input type="button" value="Add" name="add" onclick="letsDoMath()"&sol;&gt;&lt;br&gt;
+	Answer:&lt;input type="text" name="answer"&sol;&gt;
+&lt;&sol;form&gt;
+	    	</pre>
+	    	
 	    	<p>Here is the JavaScript code:</p>
 	    	<pre>
-	    		&lt;script type="text/javascript"&gt;
+&lt;script type="text/javascript"&gt;
+	function letsDoMath(){
+		// Grab the values and convert them into integers
+		var num1 = parseInt(document.myForm.num1.value);
+		var num2 = parseInt(document.myForm.num2.value);
 
-	    		&lt;&sol;script&gt;
+		// Add and save results into input box
+		document.myForm.answer.value = num1 + num2;
+	}
+&lt;&sol;script&gt;
+	    	</pre>
+
+	    	<p>Note that you can also select elements based on their class: 
+	    	<code>document.getElementByClassName("className");</code><p>
+	    </section>
+
+
+
+	    <section>
+	    	<h3>InnerHTML</h3>
+	    	<p>In the past two examples, we selected the value of the elements. The function <code>document.element.innerHTML</code> allows you to select everything between an opening and closing tag.</p>
+	    	<p>For example, let's change the text inside the following paragraph.</p>
+	    	<p id="innerHTML">Hello!</p>
+	    	<input type="button" value="Change" onclick="changeInnerHTML()"/><br>
+
+	    	<p>HTML:</p>
+	    	<pre>
+&lt;p id="innerHTML"&gt;Hello!&lt;&sol;p&gt;
+&lt;input type="button" value="Change" onclick="changeInnerHTML()"&sol;&gt;
+	    	</pre>
+	    	<p>JavaScript:</p>
+	    	<pre>
+&lt;script type="text/javascript"&gt;
+	function changeInnerHTML(){
+		document.getElementById("innerHTML").innerHTML = "Goodbye!";
+	}
+&lt;&sol;script&gt;
 	    	</pre>
 	    </section>
 
-	    <section>
-	    	<h2></h2>
-	    	<p></p>
-	    	<button type="button" onclick="" value="Go"></button>
-	    	<p>Here is the JavaScript code:</p>
-	    	<pre>
-	    		&lt;script type="text/javascript"&gt;
 
-	    		&lt;&sol;script&gt;
+		<section>
+	    	<h3>Changing In-Line CSS</h3>
+	    	<p>Now that we know how to select an element we can manipulate how it looks.</p>
+	    	<p id="changeText">We can change this text so the color is blue, and change the size of the button.</p>
+	    	<input type="button" value="Change" id="changeButton" onclick="changeCSS()"/>
+	    	
+	    	<p>HTML:</p>
+	    	<pre>
+&lt;p id="changeText"&gt;We can change this text so the color is blue, and change the size of the button.&lt;&sol;p&gt;
+&lt;input type="button" value="Change" id="changeButton" onclick="changeCSS()"&sol;&gt;
+	    	</pre>
+	    	<p>JavaScript:</p>
+	    	<pre>
+&lt;script type="text/javascript"&gt;
+	function changeCSS(){
+		document.getElementById("changeText").style.color = "blue";
+		document.getElementById("changeButton").style.width = "200px";
+	}
+&lt;&sol;script&gt;
+	    	</pre>
+	    </section>
+
+	   
+
+	    <h2>Creating and Removing Elements</h2>
+	    <section>
+	    	<h3>Creating and Adding Elements</h3>
+	    	<p>Using document.createElement(), we can add a new element to the page.</p>
+	    	<p>Lets say I have a form, but I want to add another input box, just because I can. Let's try it:</p>
+	    	<form name="createInputForm">
+	    		<input type="text"/>
+	    	</form>
+	    	<input type="button" value="Add Input Box" onclick="createInput()"/><br>
+	    	<p>Note that in order to actually place the input on the form, we had to use <code>document.form.appendChild(element);</code></p>
+
+	    	<p>HTML:</p>
+	    	<pre>
+&lt;form name="createInputForm"&gt;
+	&lt;input type="text"&sol;&gt;
+&lt;&sol;form&gt;
+&lt;input type="button" value="Add Input Box" onclick="createInput()"&sol;&gt;
+	    	</pre>
+	    	<p>JavaScript:</p>
+	    	<pre>
+&lt;script type="text/javascript"&gt;
+	function createInput(){
+		// Create the input
+		var input = document.createElement("INPUT");
+		// Insert it into the form
+		document.createInputForm.appendChild(input);
+	}
+&lt;&sol;script&gt;
+	    	</pre>
+	    </section>
+
+
+	    <section>
+	    	<h3>Removing Elements</h3>
+	    	<p>Ok, now that we have too many input boxes in the last example, lets remove those same boxes using <code>document.element.removeChild(element);</code></p>
+	    	<input type="button" value="Remove Input Box" onclick="removeInput()"/><br>
+
+	    	<p>HTML:</p>
+	    	<pre>
+&lt;input type="button" value="Remove Input Box" onclick="removeInput()"&sol;&gt;
+	    	</pre>
+	    	<p>JavaScript:</p>
+	    	<pre>
+&lt;script type="text/javascript"&gt;
+	function removeInput(){
+		var parent = document.createInputForm;
+		document.createInputForm.removeChild(parent.firstChild);
+	}
+&lt;&sol;script&gt;
+	    	</pre>
+	    </section>
+
+
+
+	    <h2>Other Cool DOM Objects</h2>
+	    <section>
+	    	<h3>Last Modified Date and Time</h3>
+	    	<p>To see when this document was last updated simply output: <code>document.lastModified;</code></p>
+	    	<p>Last Modified:</p>
+	    	<p id="modified"></p>
+	    	<input type="button" value="Get Last Modified" onclick="getLastModified()"/><br>
+
+	    	<p>HTML:</p>
+	    	<pre>
+&lt;p&gt;Last Modified:&lt;&sol;p&gt;
+&lt;p id="modified"&gt;&lt;&sol;p&gt;
+&lt;input type="button" value="Get Last Modified" onclick="getLastModified()"&sol;&gt;
+	    	</pre>
+	    	<p>JavaScript:</p>
+	    	<pre>
+&lt;script type="text/javascript"&gt;
+	function getLastModified(){
+		var modified = document.lastModified;
+		document.getElementById("modified").innerHTML = modified;
+	}
+&lt;&sol;script&gt;
+	    	</pre>
+	    </section>
+
+
+	    <section>
+	    	<h3>Get the URL</h3>
+	    	<p>This can be especially handy, like if you need to check whether a document is running locally or in a browser. Anyway, to see the full URL of the document, simply output <code>document.URL</code>.</p>
+	    	<p id="url"></p>
+	    	<input type="button" value="Get URL" onclick="getURL()"/><br>
+
+	    	<p>HTML:</p>
+	    	<pre>
+&lt;p id="url"&gt;&lt;&sol;p&gt;
+&lt;input type="button" value="Get URL" onclick="getURL()"&sol;&gt;
+	    	</pre>
+	    	<p>JavaScript:</p>
+	    	<pre>
+&lt;script type="text/javascript"&gt;
+	function getURL(){
+		var url = document.URL;
+		document.getElementById("url").innerHTML = url;
+	}
+&lt;&sol;script&gt;
 	    	</pre>
 	    </section>
 
