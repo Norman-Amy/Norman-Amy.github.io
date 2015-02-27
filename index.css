@@ -27,8 +27,8 @@ body {
 
 #background img {
 	position: absolute;
-	right:-600px;
-	top: 400px;
+	right:-220px;
+	top: 590px;
 	-webkit-transform:rotate(-50deg);
 	-mozilla-transform:rotate(-50deg);
 	z-index:-1;
