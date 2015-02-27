@@ -5,6 +5,7 @@
 		<meta name="Author" content="Amy Norman">
 		<script type="text/javascript">
 			function changeGoButton(){
+				window.alert(document.getElementByID("goButton").value);
 				document.getElementByID("goButton").value = "Stop";
 			}
 		</script>
@@ -21,7 +22,7 @@
 	    <section>
 	    	<h2>GetElementByID()</h2>
 	    	<p>This built in function allows you to select an element based on its id attribute. For example, the following button value can be changed from "Go" to "Stop" by selecting its unique id of "goButton".</p>
-	    	<input type="button" value="button" id="goButton" onclick="changeGoButton()"/>
+	    	<input type="button" value="Go" id="goButton" onclick="changeGoButton()"/>
 	    	<p>Here is the JavaScript code:</p>
 	    	<pre>
 &lt;script type="text/javascript"&gt;
