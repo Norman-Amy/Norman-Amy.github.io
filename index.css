@@ -1,6 +1,8 @@
 body {
-	padding-left: 15px;
+	padding: 15px;
 	font-family: "Verdana", "Helvetica", "Tahoma";
+	max-width: 800px;
+	border: thin green solid;
 }
 
 h1,h2,h3 {
@@ -8,8 +10,8 @@ h1,h2,h3 {
 }
 
 section {
-	margin-top: 15px;
-	margin-bottom: 15px;
+	margin-top: 30px;
+	margin-bottom: 30px;
 }
 
 h2 {
@@ -19,6 +21,7 @@ h2 {
 h3 {
 	padding-left: 30px;
 }
+
 section p {
 	padding-left: 15px;
 }
