@@ -51,6 +51,7 @@
 				var url = document.URL;
 				document.getElementById("url").innerHTML = url;
 			}
+
 		</script>
 	</head>
 	<body>
@@ -275,6 +276,26 @@
 &lt;&sol;script&gt;
 	    	</pre>
 	    </section>
+
+
+	    <section>
+	    	<h3>Write()</h3>
+	    	<p>This function is handy for outputting text to the screen. It can be done using inline script, or output in place of the whole document by using <code>document.write()</code> inside a function.</p>
+	    	<p>For this example, we will only be testing the inline version. There will be no button because this is not in a function. The following text is outputted using <code>document.write()</code></p>
+	    	<script type="text/javascript"> 
+	    		document.write("<p>hello world!</p>");
+	    	</script>
+
+	    	<p>HTML (with inline script tags):</p>
+	    	<pre>
+&lt;script type="text/javascript"&gt;
+	document.write("&lt;p&gt;hello world!&lt;&sol;p&gt;");
+&lt;&sol;script&gt;
+	    	</pre>
+	    </section>
+
+
+
 
 	    <footer>
 	    	Last Updated: 
