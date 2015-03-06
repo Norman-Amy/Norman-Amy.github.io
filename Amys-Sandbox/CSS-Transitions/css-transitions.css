@@ -1,0 +1,285 @@
+body {
+	padding: 15px;
+	font-family: verdana, helvetiva, tahoma;
+}
+
+h1,h2,h3 {
+	font-family: "cooper", georgia, "Times New Roman";
+}
+
+h2{
+	clear:both;
+	padding-top: 10px;
+}
+
+.col1, .col2, .col3 {
+	width:300px; 
+	float: left;
+	border: thin black solid;
+	padding: 10px;
+	margin: 10px;
+	min-height: 200px;
+}
+
+.col1 {
+	clear:both;
+}
+
+div {
+	background-color: #a3c63c;
+	min-height: 100px;
+	width: 170px;
+	margin: auto;
+	padding: 5px 15px;
+	border-radius: 5px;
+}
+
+/* The following are each of the divs with their transitions: */
+#opac {
+	opacity: 1;
+ 	-webkit-transition-property: opacity;
+ 	-moz-transition-property: opacity;
+ 	-o-transition-property: opacity;
+ 	transition-property: opacity;
+ 	-webkit-transition-duration: 1s;
+  	-moz-transition-duration: 1s;
+  	-o-transition-duration: 1s;
+  	transition-duration: 1s;
+  	-webkit-transition-timing-function: ease-in-out;
+    -moz-transition-timing-function: ease-in-out;
+    -o-transition-timing-function: ease-in-out;
+    transition-timing-function: ease-in-out;
+ /* Note: Earlier versions of IE, like 8 and 9 need -ms- prefix */
+}
+
+#opac:hover {
+	opacity: 0;
+}
+
+#left {
+	position: relative;
+	left: 0px;
+ 	-webkit-transition: left 3s ease;
+ 	-moz-transition: left 3s ease;
+	-o-transition: left 3s ease;
+ 	transition: left 3s ease;
+}
+
+#left:hover {
+	left: 20px;
+}
+
+#f-size {
+	font-size: 12pt;
+ 	-webkit-transition: font-size 1s linear;
+ 	-moz-transition: font-size 1s linear;
+ 	-o-transition: font-size 1s linear;
+ 	transition: font-size 1s linear;
+}
+
+#f-size:hover {
+	font-size: 20pt;
+}
+
+#ease {
+ 	-webkit-transition: width 3s;
+ 	-moz-transition: width 3s;
+ 	-o-transition: width 3s;
+ 	transition: width 3s;
+ 	-webkit-transition-timing-function: ease;
+    -moz-transition-timing-function: ease;
+    -o-transition-timing-function: ease;
+    transition-timing-function: ease;
+}
+
+#ease:hover {
+	width: 1px;
+}
+
+#linear {
+ 	-webkit-transition: width 3s;
+ 	-moz-transition: width 3s;
+ 	-o-transition: width 3s;
+ 	transition: width 3s;
+ 	-webkit-transition-timing-function: linear;
+    -moz-transition-timing-function: linear;
+    -o-transition-timing-function: linear;
+    transition-timing-function: linear;
+}
+
+#linear:hover {
+	width: 1px;
+}
+
+#e-in {
+ 	-webkit-transition: width 3s;
+ 	-moz-transition: width 3s;
+ 	-o-transition: width 3s;
+ 	transition: width 3s;
+ 	-webkit-transition-timing-function: ease-in;
+    -moz-transition-timing-function: ease-in;
+    -o-transition-timing-function: ease-in;
+    transition-timing-function: ease-in;
+}
+
+#e-in:hover {
+	width: 1px;
+}
+
+#e-out {
+ 	-webkit-transition: width 3s;
+ 	-moz-transition: width 3s;
+ 	-o-transition: width 3s;
+ 	transition: width 3s;
+ 	-webkit-transition-timing-function: ease-out;
+    -moz-transition-timing-function: ease-out;
+    -o-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+}
+
+#e-out:hover {
+	width: 1px;
+}
+
+#e-in-out {
+ 	-webkit-transition: width 3s;
+ 	-moz-transition: width 3s;
+ 	-o-transition: width 3s;
+ 	transition: width 3s;
+ 	-webkit-transition-timing-function: ease-in-out;
+    -moz-transition-timing-function: ease-in-out;
+    -o-transition-timing-function: ease-in-out;
+    transition-timing-function: ease-in-out;
+}
+
+#e-in-out:hover {
+	width: 1px;
+}
+
+#step-start {
+	width: 50px;
+	margin-left: 60px;
+	float: left;
+ 	-webkit-transition: width 3s;
+ 	-moz-transition: width 3s;
+ 	-o-transition: width 3s;
+ 	transition: width 3s;
+ 	-webkit-transition-timing-function: steps(4, start);
+    -moz-transition-timing-function: steps(4, start);
+    -o-transition-timing-function: steps(4, start);
+    transition-timing-function: steps(4, start);
+}
+
+#step-start:hover {
+	width: 1px;
+}
+
+#step-end {
+ 	width: 50px;
+ 	margin-right: 60px;
+ 	-webkit-transition: width 3s;
+ 	-moz-transition: width 3s;
+ 	-o-transition: width 3s;
+ 	transition: width 3s;
+ 	-webkit-transition-timing-function: steps(4, end);
+    -moz-transition-timing-function: steps(4, end);
+    -o-transition-timing-function: steps(4, end);
+    transition-timing-function: steps(4, end);
+}
+
+#step-end:hover {
+	width: 1px;
+}
+
+#zeroSecDur {
+ 	-webkit-transition: background-color linear;
+ 	-moz-transition: background-color linear;
+ 	-o-transition: background-color linear;
+ 	transition: background-color linear;
+ 	-webkit-transition-duration: 0s;
+  	-moz-transition-duration: 0s;
+  	-o-transition-duration: 0s;
+  	transition-duration: 0s;
+}
+
+#zeroSecDur:hover {
+	background-color: blue;
+}
+
+#oneSecDur {
+ 	-webkit-transition: background-color linear;
+ 	-moz-transition: background-color linear;
+ 	-o-transition: background-color linear;
+ 	transition: background-color linear;
+ 	-webkit-transition-duration: 1s;
+  	-moz-transition-duration: 1s;
+  	-o-transition-duration: 1s;
+  	transition-duration: 1s;
+}
+
+#oneSecDur:hover {
+	background-color: blue;
+}
+
+#threeSecDur {
+ 	-webkit-transition: background-color linear;
+ 	-moz-transition: background-color linear;
+ 	-o-transition: background-color linear;
+ 	transition: background-color linear;
+ 	-webkit-transition-duration: 3s;
+  	-moz-transition-duration: 3s;
+  	-o-transition-duration: 3s;
+  	transition-duration: 3s;
+}
+
+#threeSecDur:hover {
+	background-color: blue;
+}
+
+#zeroSecDelay {
+	border: white 15px solid;
+ 	-webkit-transition: border-color 1s ease;
+ 	-moz-transition: border-color 1s ease;
+ 	-o-transition: border-color 1s ease;
+ 	transition: border-color 1s ease;
+ 	-webkit-transition-delay: 0s;
+ 	-moz-transition-delay: 0s;
+ 	-o-transition-delay: 0s;
+ 	transition-delay: 0s;
+}
+
+#zeroSecDelay:hover {
+	border-color: black;
+}
+
+#fiveSecDelay {
+	border: white 15px solid;
+ 	-webkit-transition: border-color 1s ease;
+ 	-moz-transition: border-color 1s ease;
+ 	-o-transition: border-color 1s ease;
+ 	transition: border-color 1s ease;
+ 	-webkit-transition-delay: 5s;
+ 	-moz-transition-delay: 5s;
+ 	-o-transition-delay: 5s;
+ 	transition-delay: 5s;
+}
+
+#fiveSecDelay:hover {
+	border-color: black;
+}
+
+#negOneSecDelay {
+ 	border: white 15px solid;
+ 	-webkit-transition: border-color 3s ease;
+ 	-moz-transition: border-color 3s ease;
+ 	-o-transition: border-color 3s ease;
+ 	transition: border-color 3s ease;
+ 	-webkit-transition-delay: -1s;
+ 	-moz-transition-delay: -1s;
+ 	-o-transition-delay: -1s;
+ 	transition-delay: -1s;	
+}
+
+#negOneSecDelay:hover {
+	border-color: black;
+}
