@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> Fuel Economy Calculator </title>
+		<meta name="Author" content="Amy Norman and Crystal Coatney">
+		<meta name="Description" content="This is Team 1's app for CIT 261 - WI15">
+		<meta charset="UTF-8">
+		<script type="text/javascript">
+
+			function loadExistingCars(){
+				var dbCars = JSON.parse(loadLocalStorage());
+				if (dbCars == "null"){
+
+					for (var i = 0; i < dbCars.carNames.length; i++){
+						var option = document.createElement("OPTION");
+						document.chooseCar.car.appendChild(option);
+						var current = document.chooseCar.car[i];
+						current.innerHTML = dbCars.carNames[i].name;
+						current.setAttribute("name", "car");
+						current.setAttribute("value", dbCars.carNames[i].name);
+
+					}
+				} else {
+					document.chooseCar.innerHTML = "<p> No cars exist </p>";
+					document.chooseCar.style.color = "red";
+				}
+			}
+
+            function loadLocalStorage(){
+            	return localStorage.getItem('dbCars');
+            }
+
+			function selectCar(){
+				var newCar = document.addCar.car.value;
+				var dbCars = loadLocalStorage();
+
+				if (newCar != ""){
+					if (dbCars.carNames){
+						dbCars.carNames.push({ name: newCar });
+						localStorage.setItem('dbCars', dbCars);
+					} else {
+						dbCars = {
+							carNames: [
+								{
+									name: newCar
+								}
+							]
+						};
+						localStorage.setItem('dbCars' , JSON.stringify(dbCars));
+					}
+
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<h1> Fuel Economy Calculator </h1>
+		<div id="content">
+			<h2> Select Existing Vehicle </h2>
+			<form name="chooseCar">
+	       		<select name="car">
+	       		 	<script type="text/javascript">
+	       				loadExistingCars();
+	       			</script>
+	       		</select> 
+			</form>
+
+			<h2> Or Add a New Vehicle </h2>
+			<form name="addCar">
+				<input type="text" name="car" value="" />
+			</form>
+		</div>
+		<br>
+		<input type="button" id="next" onclick="selectCar()" value="Next"/>
+	</body>
+</html>
