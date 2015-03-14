@@ -6,55 +6,128 @@
 		<meta name="Description" content="This is Team 1's app for CIT 261 - WI15">
 		<meta charset="UTF-8">
 		<script type="text/javascript">
-
+			
+			// This function will check if any cars exist, if so, create a drop-down menu
+			// Otherwise, display a message that "No cars exist" 
 			function loadExistingCars(){
-				var dbCars = JSON.parse(loadLocalStorage());
-				if (dbCars == "null"){
+				// Get cars out of storage
+				var dbCars = loadLocalStorage();
 
+				// Check to make sure the object returned wasn't empty
+				if (dbCars != undefined && dbCars != null){
+					// Loop trough array of cars to create new options for the drop down menu.
+
+					// Add default option
+					var option = document.createElement("OPTION");
+					// Save option into select
+					document.chooseCar.car.appendChild(option);
+					var first = document.chooseCar.car[0];
+					// Add text
+					first.innerHTML = "Select a car from below:";
+					// Add attributes
+					first.setAttribute("name", "car");
+					first.setAttribute("value", "");
+
+					// Loop through array of cars to populate list
 					for (var i = 0; i < dbCars.carNames.length; i++){
+						// Create option element
 						var option = document.createElement("OPTION");
+						// Save option into the parent select element
 						document.chooseCar.car.appendChild(option);
-						var current = document.chooseCar.car[i];
+						// Select the current option of the select element (skipping first)
+						var current = document.chooseCar.car[i + 1];
+						// Display the car's name
 						current.innerHTML = dbCars.carNames[i].name;
+						// Add attributes to the option element
 						current.setAttribute("name", "car");
 						current.setAttribute("value", dbCars.carNames[i].name);
-
 					}
+
+
 				} else {
+					// Remove select element and display a paragraph with red text as error
 					document.chooseCar.innerHTML = "<p> No cars exist </p>";
 					document.chooseCar.style.color = "red";
+
+					// Add hidden value for existing car
+					var input = document.createElement("INPUT");
+					// Add input to chooseCar form
+					document.chooseCar.appendChild(input);
+					// Select the new input
+					input = document.chooseCar.getElementsByTagName("INPUT")[0];
+					// Add attribute to represent empty car menu
+					input.setAttribute("name", "car");
+					input.setAttribute("value", "");
+					input.setAttribute("type", "hidden");
 				}
 			}
 
+
+			// This function will grab the car object out of local storage 
+			// and parse it into a JavaScript object
             function loadLocalStorage(){
-            	return localStorage.getItem('dbCars');
+            	return JSON.parse(localStorage.getItem('dbCars'));
             }
 
+            // This function will take the car selected from either form.
+            // If a new car was added, save that and add it to list of cars.
+            // If an existing car was selected, save it to local storage.
 			function selectCar(){
 				var newCar = document.addCar.car.value;
+				var existingCar = document.chooseCar.car.value;
 				var dbCars = loadLocalStorage();
 
-				if (newCar != ""){
-					if (dbCars.carNames){
-						dbCars.carNames.push({ name: newCar });
-						localStorage.setItem('dbCars', dbCars);
+
+				// Reset error message
+				document.getElementById("errors").innerHTML = "";
+
+				// Check if the new car was added and existing car was not, 
+				// else check if existing car selected and new car was not,
+				// else throw error that none or both were selected.
+				if (newCar != "" && existingCar == ""){
+					// Check if this is not the first car
+					if (dbCars != undefined && dbCars != null){
+						// Add new car to object
+						dbCars.carNames.push({ name: newCar, mpg: 0, numOfFills: 0 });
+
 					} else {
+						// Create a new car object
 						dbCars = {
 							carNames: [
 								{
-									name: newCar
+									name: newCar,
+									mpg: 0,
+									numOfFills: 0
 								}
 							]
 						};
-						localStorage.setItem('dbCars' , JSON.stringify(dbCars));
 					}
 
+					// Save changes to local storage
+					localStorage.setItem('dbCars' , JSON.stringify(dbCars));
+
+					// Save new car as selected
+					localStorage.setItem('selectedCar', JSON.stringify({ name: newCar, mpg: 0, numOfFills: 0 }));
+
+					// Add code to call next form
+
+				} else if (newCar == "" && existingCar != ""){
+					// Add code here to find car in list of existing cars
+					// Save existing car to localStorage
+
+					// Add code to call next form
+
+				} else {
+					// Display error to select a car (do not call next form)
+					document.getElementById("errors").innerHTML = "<p> An error occurred: Please select a car </p>";
+					document.getElementById("errors").style.color = "red";
 				}
 			}
 		</script>
 	</head>
 	<body>
 		<h1> Fuel Economy Calculator </h1>
+		<div id="errors"></div>
 		<div id="content">
 			<h2> Select Existing Vehicle </h2>
 			<form name="chooseCar">
