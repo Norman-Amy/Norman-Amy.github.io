@@ -109,7 +109,8 @@
 					// Save new car as selected
 					localStorage.setItem('selectedCar', JSON.stringify({ name: newCar, mpg: 0, numOfFills: 0 }));
 
-					// Add code to call next form
+					// Call next form: Miles
+					loadMilesForm();
 
 				} else if (newCar == "" && existingCar != ""){
 					// Loop through array of cars to find existing car
@@ -127,7 +128,6 @@
 						};
 					});
 					
-
 					// Call next form: Miles
 					loadMilesForm();
 
