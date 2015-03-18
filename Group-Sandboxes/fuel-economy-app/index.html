@@ -170,7 +170,6 @@
 
 				// Grab inputted miles
 				var miles = parseInt(document.milesForm.miles.value);
-				console.log(miles);
 
 				// Verify that miles is inputted properly
 				if (isNaN(miles) || miles === null || miles === undefined || miles <= 0){
@@ -178,6 +177,9 @@
 					document.getElementById("errors").innerHTML = "<p> Invalid miles. Please try again. </p>";
 					document.getElementById("errors").style.color = "red";
 				} else {
+					// Clear error message if it exists
+					document.getElementById("errors").innerHTML = "";
+					console.log(miles)
 					// Miles are valid. Save in local storage
 					localStorage.setItem('mpg', JSON.stringify({ "miles": miles, "gallons": null}));
 				}
