@@ -112,10 +112,24 @@
 					// Add code to call next form
 
 				} else if (newCar == "" && existingCar != ""){
-					// Add code here to find car in list of existing cars
-					// Save existing car to localStorage
+					// Loop through array of cars to find existing car
+					dbCars.carNames.forEach(function(element, index, array){
+						// Once the existing car is found, select it.
+						if (element.name === existingCar){
+							var car = {
+								name: element.name,
+								mpg: element.mpg,
+								numOfFills: element.numOfFills
+							};
 
-					// Add code to call next form
+							// Save existing car to localStorage
+							localStorage.setItem('selectedCar', JSON.stringify(car));
+						};
+					});
+					
+
+					// Call next form: Miles
+					loadMilesForm();
 
 				} else {
 					// Display error to select a car (do not call next form)
@@ -123,6 +137,50 @@
 					document.getElementById("errors").style.color = "red";
 				}
 			}
+
+
+			// This function will grab the miles form and display it on the screen
+			function loadMilesForm(){
+				var xmlhttp;
+				if (window.XMLHttpRequest){
+				  	// code for IE7+, Firefox, Chrome, Opera, Safari
+				  	xmlhttp=new XMLHttpRequest();
+				} else {
+				  	// code for IE6, IE5
+					xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+				}
+				xmlhttp.onreadystatechange=function() {
+					// If the document successfully loaded, display contents
+					if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+
+						// Display miles form on page
+					   	document.getElementById("content").innerHTML = xmlhttp.responseText;
+					   	// Change next button
+					   	document.getElementById("next").onclick = saveMiles;
+
+					} else {
+						
+					    // Display error
+					    document.getElementById("errors").innerHTML = "<p> Could not load next form. Please try running in browser. </p>";
+					}
+				}
+				xmlhttp.open("GET","miles.html",true);
+				xmlhttp.send();
+			}
+
+
+			// This function will save the inputted miles and then call the next form to load
+			function saveMiles(){
+				console.log("saveMiles works");
+
+				// Add code to grab miles
+				// Verify that miles is inputted properly
+				// save miles in local storage
+				
+				// load Gallons form
+			}
+
+
 		</script>
 	</head>
 	<body>
