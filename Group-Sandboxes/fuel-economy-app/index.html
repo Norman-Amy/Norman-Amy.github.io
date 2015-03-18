@@ -173,7 +173,7 @@
 				console.log(miles);
 
 				// Verify that miles is inputted properly
-				if (miles == "NaN" || miles === "" || miles === null || miles === undefined || miles <= 0){
+				if (isNaN(miles) || miles === null || miles === undefined || miles <= 0){
 					// Prompt user to re-input miles
 					document.getElementById("errors").innerHTML = "<p> Invalid miles. Please try again. </p>";
 					document.getElementById("errors").style.color = "red";
