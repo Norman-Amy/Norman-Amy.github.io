@@ -176,18 +176,24 @@
 					// Prompt user to re-input miles
 					document.getElementById("errors").innerHTML = "<p> Invalid miles. Please try again. </p>";
 					document.getElementById("errors").style.color = "red";
+
 				} else {
 					// Clear error message if it exists
 					document.getElementById("errors").innerHTML = "";
-					console.log(miles)
+
 					// Miles are valid. Save in local storage
 					localStorage.setItem('mpg', JSON.stringify({ "miles": miles, "gallons": null}));
-				}
-				
-				// load Gallons form
 
+					// Load next form: Gallons
+					loadGallonsForm();
+				}
 			}
 
+
+			// This is a placeholder function for loading the Gallons form
+			function loadGallonsForm(){
+				// Add AJAX request to load form here
+			}
 
 		</script>
 	</head>
