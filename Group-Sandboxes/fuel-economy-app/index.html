@@ -183,7 +183,7 @@
 			// This function will save the inputted gallons and then call the next form to load
 			function saveGallons(){
 				// Grab inputted gallons
-				var gallons = parseInt(document.gallonsform.gallons.value);
+				var gallons = parseInt(document.gallonsForm.gallons.value);
 				// Verify that gallons is inputted properly
 				if (isNaN(gallons) || gallons === null || gallons === undefined || gallons <= 0){
 					// Prompt user to re-input miles
@@ -193,7 +193,6 @@
 					// Clear error message if it exists
 					document.getElementById("errors").innerHTML = "";
 				var mpg = JSON.parse(localStorage.getItem('mpg'));
-				console.log(mpg.miles);
                                 mpg.gallons = gallons;
                                 
             // Gallons are valid. Save in local storage
@@ -222,7 +221,7 @@
 		<br>
 		<input type="button" id="next" onclick="selectCar()" value="Next"/>
                 <script type="text/javascript">
-	       				loadExistingCars()();
+	       				loadExistingCars();
 	       			</script>
 	</body>
 </html>
