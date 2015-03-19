@@ -180,10 +180,10 @@
 				xmlhttp.open("GET","gallons.html",true);
 				xmlhttp.send();
 			}
-			// This function will save the inputted miles and then call the next form to load
+			// This function will save the inputted gallons and then call the next form to load
 			function saveGallons(){
 				// Grab inputted gallons
-				var gallons = parseInt(document.GallonsForm.Gallons.value);
+				var gallons = parseInt(document.gallonsform.gallons.value);
 				// Verify that gallons is inputted properly
 				if (isNaN(gallons) || gallons === null || gallons === undefined || gallons <= 0){
 					// Prompt user to re-input miles
@@ -192,8 +192,11 @@
 				} else {
 					// Clear error message if it exists
 					document.getElementById("errors").innerHTML = "";
-					// Gallons are valid. Save in local storage
-					//I need help here//localStorage.setItem('mpg', JSON.stringify({ "gallons": gallons, "gallons": null}));
+				var mpg = JSON.parse(localstorage.getItem('mpg'));
+                                mpg.gallons = gallons;
+                                
+            // Gallons are valid. Save in local storage
+				localStorage.setItem('mpg', JSON.stringify(mpg));
 					
 				}
 			}
@@ -206,9 +209,7 @@
 			<h2> Select Existing Vehicle </h2>
 			<form name="chooseCar">
 	       		<select name="car">
-	       		 	<script type="text/javascript">
-	       				loadExistingCars();
-	       			</script>
+	       		 	
 	       		</select> 
 			</form>
 
@@ -219,5 +220,8 @@
 		</div>
 		<br>
 		<input type="button" id="next" onclick="selectCar()" value="Next"/>
+                <script type="text/javascript">
+	       				loadExistingCars()();
+	       			</script>
 	</body>
 </html>
