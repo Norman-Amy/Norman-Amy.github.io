@@ -192,7 +192,8 @@
 				} else {
 					// Clear error message if it exists
 					document.getElementById("errors").innerHTML = "";
-				var mpg = JSON.parse(localstorage.getItem('mpg'));
+				var mpg = JSON.parse(localStorage.getItem('mpg'));
+				console.log(mpg.miles);
                                 mpg.gallons = gallons;
                                 
             // Gallons are valid. Save in local storage
