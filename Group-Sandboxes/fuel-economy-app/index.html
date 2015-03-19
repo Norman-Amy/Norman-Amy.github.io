@@ -192,12 +192,17 @@
 				} else {
 					// Clear error message if it exists
 					document.getElementById("errors").innerHTML = "";
-				var mpg = JSON.parse(localStorage.getItem('mpg'));
-                                mpg.gallons = gallons;
+
+					//Grab exisitng mpg item
+					var mpg = JSON.parse(localStorage.getItem('mpg'));
+					// Update gallons
+                    mpg.gallons = gallons;
                                 
-            	// Gallons are valid. Save in local storage
-				localStorage.setItem('mpg', JSON.stringify(mpg));
-				loadCalculatingView();	
+	            	// Gallons are valid. Save in local storage
+					localStorage.setItem('mpg', JSON.stringify(mpg));
+
+					// Load next view: Calculating
+					loadCalculatingView();	
 				}
 			}
 			// This function will load the "Calculating" screen for 3 seconds then call the display screen 
@@ -208,7 +213,7 @@
                 var next = document.getElementById('next');
                 next.parentNode.removeChild(next);
 
-                // Start timer for 3 seconds, then call displayResults()
+                // Start timer for 3 seconds, then load next view: display
             	setTimeout(function(){displayResults();},3000);
             } 
             // This function will calculate and then output the mpg to the screen.
