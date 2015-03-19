@@ -180,7 +180,7 @@
 				xmlhttp.open("GET","gallons.html",true);
 				xmlhttp.send();
 			}
-			// This function will save the inputted gallons and then call the next form to load
+			// This function will save the inputted miles and then call the next form to load
 			function saveGallons(){
 				// Grab inputted gallons
 				var gallons = parseInt(document.GallonsForm.Gallons.value);
@@ -194,7 +194,7 @@
 					document.getElementById("errors").innerHTML = "";
 					// Gallons are valid. Save in local storage
 					//I need help here//localStorage.setItem('mpg', JSON.stringify({ "gallons": gallons, "gallons": null}));
-					
+					/
 				}
 			}
 		</script>
