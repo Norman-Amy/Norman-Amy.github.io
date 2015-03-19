@@ -12,11 +12,9 @@
 			function loadExistingCars(){
 				// Get cars out of storage
 				var dbCars = loadLocalStorage();
-
 				// Check to make sure the object returned wasn't empty
 				if (dbCars != undefined && dbCars != null){
 					// Loop trough array of cars to create new options for the drop down menu.
-
 					// Add default option
 					var option = document.createElement("OPTION");
 					// Save option into select
@@ -27,7 +25,6 @@
 					// Add attributes
 					first.setAttribute("name", "car");
 					first.setAttribute("value", "");
-
 					// Loop through array of cars to populate list
 					for (var i = 0; i < dbCars.carNames.length; i++){
 						// Create option element
@@ -42,13 +39,10 @@
 						current.setAttribute("name", "car");
 						current.setAttribute("value", dbCars.carNames[i].name);
 					}
-
-
 				} else {
 					// Remove select element and display a paragraph with red text as error
 					document.chooseCar.innerHTML = "<p> No cars exist </p>";
 					document.chooseCar.style.color = "red";
-
 					// Add hidden value for existing car
 					var input = document.createElement("INPUT");
 					// Add input to chooseCar form
@@ -61,14 +55,11 @@
 					input.setAttribute("type", "hidden");
 				}
 			}
-
-
 			// This function will grab the car object out of local storage 
 			// and parse it into a JavaScript object
             function loadLocalStorage(){
             	return JSON.parse(localStorage.getItem('dbCars'));
             }
-
             // This function will take the car selected from either form.
             // If a new car was added, save that and add it to list of cars.
             // If an existing car was selected, save it to local storage.
@@ -76,11 +67,8 @@
 				var newCar = document.addCar.car.value;
 				var existingCar = document.chooseCar.car.value;
 				var dbCars = loadLocalStorage();
-
-
 				// Reset error message
 				document.getElementById("errors").innerHTML = "";
-
 				// Check if the new car was added and existing car was not, 
 				// else check if existing car selected and new car was not,
 				// else throw error that none or both were selected.
@@ -89,7 +77,6 @@
 					if (dbCars != undefined && dbCars != null){
 						// Add new car to object
 						dbCars.carNames.push({ name: newCar, mpg: 0, numOfFills: 0 });
-
 					} else {
 						// Create a new car object
 						dbCars = {
@@ -102,16 +89,12 @@
 							]
 						};
 					}
-
 					// Save changes to local storage
 					localStorage.setItem('dbCars' , JSON.stringify(dbCars));
-
 					// Save new car as selected
 					localStorage.setItem('selectedCar', JSON.stringify({ name: newCar, mpg: 0, numOfFills: 0 }));
-
 					// Call next form: Miles
 					loadMilesForm();
-
 				} else if (newCar == "" && existingCar != ""){
 					// Loop through array of cars to find existing car
 					dbCars.carNames.forEach(function(element, index, array){
@@ -122,7 +105,6 @@
 								mpg: element.mpg,
 								numOfFills: element.numOfFills
 							};
-
 							// Save existing car to localStorage
 							localStorage.setItem('selectedCar', JSON.stringify(car));
 						};
@@ -130,15 +112,12 @@
 					
 					// Call next form: Miles
 					loadMilesForm();
-
 				} else {
 					// Display error to select a car (do not call next form)
 					document.getElementById("errors").innerHTML = "<p> An error occurred: Please select a car </p>";
 					document.getElementById("errors").style.color = "red";
 				}
 			}
-
-
 			// This function will grab the miles form and display it on the screen
 			function loadMilesForm(){
 				var xmlhttp;
@@ -152,49 +131,72 @@
 				xmlhttp.onreadystatechange=function() {
 					// If the document successfully loaded, display contents
 					if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-
 						// Display miles form on page
 					   	document.getElementById("content").innerHTML = xmlhttp.responseText;
 					   	// Change next button
 					   	document.getElementById("next").onclick = saveMiles;
-
 					}
 				}
 				xmlhttp.open("GET","miles.html",true);
 				xmlhttp.send();
 			}
-
-
 			// This function will save the inputted miles and then call the next form to load
 			function saveMiles(){
-
 				// Grab inputted miles
 				var miles = parseInt(document.milesForm.miles.value);
-
 				// Verify that miles is inputted properly
 				if (isNaN(miles) || miles === null || miles === undefined || miles <= 0){
 					// Prompt user to re-input miles
 					document.getElementById("errors").innerHTML = "<p> Invalid miles. Please try again. </p>";
 					document.getElementById("errors").style.color = "red";
-
 				} else {
 					// Clear error message if it exists
 					document.getElementById("errors").innerHTML = "";
-
 					// Miles are valid. Save in local storage
 					localStorage.setItem('mpg', JSON.stringify({ "miles": miles, "gallons": null}));
-
 					// Load next form: Gallons
 					loadGallonsForm();
 				}
 			}
-
-
 			// This is a placeholder function for loading the Gallons form
 			function loadGallonsForm(){
-				// Add AJAX request to load form here
+				var xmlhttp;
+				if (window.XMLHttpRequest){
+				  	// code for IE7+, Firefox, Chrome, Opera, Safari
+				  	xmlhttp=new XMLHttpRequest();
+				} else {
+				  	// code for IE6, IE5
+					xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+				}
+				xmlhttp.onreadystatechange=function() {
+					// If the document successfully loaded, display contents
+					if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+						// Display miles form on page
+					   	document.getElementById("content").innerHTML = xmlhttp.responseText;
+					   	// Change next button
+					   	document.getElementById("next").onclick = saveGallons;
+					}
+				}
+				xmlhttp.open("GET","miles.html",true);
+				xmlhttp.send();
 			}
-
+			// This function will save the inputted gallons and then call the next form to load
+			function saveGallons(){
+				// Grab inputted gallons
+				var gallons = parseInt(document.GallonsForm.Gallons.value);
+				// Verify that gallons is inputted properly
+				if (isNaN(gallons) || gallons === null || gallons === undefined || gallons <= 0){
+					// Prompt user to re-input miles
+					document.getElementById("errors").innerHTML = "<p> Invalid gallons. Please try again. </p>";
+					document.getElementById("errors").style.color = "red";
+				} else {
+					// Clear error message if it exists
+					document.getElementById("errors").innerHTML = "";
+					// Gallons are valid. Save in local storage
+					//I need help here//localStorage.setItem('mpg', JSON.stringify({ "gallons": gallons, "gallons": null}));
+					
+				}
+			}
 		</script>
 	</head>
 	<body>
