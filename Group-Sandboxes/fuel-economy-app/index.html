@@ -197,9 +197,18 @@
                                 
             // Gallons are valid. Save in local storage
 				localStorage.setItem('mpg', JSON.stringify(mpg));
-					
+				loadCalculatingView();	
 				}
 			}
+                       function loadCalculatingView(){
+                           document.getElementById("content").innerHTML = "<h2> Calculating</h2>";
+                           
+                           setTimeout(function(){displayResults();},3000);
+                       } 
+                       function displayResults(){
+                         //pull local storage on mpg and selectedCar,save into var, 
+                       }
+                  
 		</script>
 	</head>
 	<body>
