@@ -195,19 +195,25 @@
 				var mpg = JSON.parse(localStorage.getItem('mpg'));
                                 mpg.gallons = gallons;
                                 
-            // Gallons are valid. Save in local storage
+            	// Gallons are valid. Save in local storage
 				localStorage.setItem('mpg', JSON.stringify(mpg));
 				loadCalculatingView();	
 				}
 			}
-                       function loadCalculatingView(){
-                           document.getElementById("content").innerHTML = "<h2> Calculating</h2>";
-                           
-                           setTimeout(function(){displayResults();},3000);
-                       } 
-                       function displayResults(){
-                         //pull local storage on mpg and selectedCar,save into var, 
-                       }
+			// This function will load the "Calculating" screen for 3 seconds then call the display screen 
+            function loadCalculatingView(){
+           		// Replace the content on the page
+            	document.getElementById("content").innerHTML = "<h2> Calculating</h2>";
+                // Remove next button (no longer needed)
+                document.removeChild(document.getElementById('next'));
+
+                // Start timer for 3 seconds, then call displayResults()
+            	setTimeout(function(){displayResults();},3000);
+            } 
+            // This function will calculate and then output the mpg to the screen.
+            function displayResults(){
+            	//pull local storage on mpg and selectedCar,save into var, 
+            }
                   
 		</script>
 	</head>
