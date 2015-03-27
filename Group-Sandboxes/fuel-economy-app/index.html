@@ -57,12 +57,12 @@
 			}
 			// This function will grab the car object out of local storage 
 			// and parse it into a JavaScript object
-            function loadLocalStorage(){
-            	return JSON.parse(localStorage.getItem('dbCars'));
-            }
-            // This function will take the car selected from either form.
-            // If a new car was added, save that and add it to list of cars.
-            // If an existing car was selected, save it to local storage.
+		        function loadLocalStorage(){
+		        	return JSON.parse(localStorage.getItem('dbCars'));
+		        }
+		        // This function will take the car selected from either form.
+		        // If a new car was added, save that and add it to list of cars.
+		        // If an existing car was selected, save it to local storage.
 			function selectCar(){
 				var newCar = document.addCar.car.value;
 				var existingCar = document.chooseCar.car.value;
@@ -76,14 +76,15 @@
 					// Check if this is not the first car
 					if (dbCars != undefined && dbCars != null){
 						// Add new car to object
-						dbCars.carNames.push({ name: newCar, mpg: 0, numOfFills: 0 });
+						dbCars.carNames.push({ name: newCar, avgMpg: 0, allMpg: [], numOfFills: 0 });
 					} else {
 						// Create a new car object
 						dbCars = {
 							carNames: [
 								{
 									name: newCar,
-									mpg: 0,
+									avgMpg: 0,
+									allMpg: [],
 									numOfFills: 0
 								}
 							]
@@ -92,7 +93,7 @@
 					// Save changes to local storage
 					localStorage.setItem('dbCars' , JSON.stringify(dbCars));
 					// Save new car as selected
-					localStorage.setItem('selectedCar', JSON.stringify({ name: newCar, mpg: 0, numOfFills: 0 }));
+					localStorage.setItem('selectedCar', JSON.stringify({ name: newCar, avgMpg: 0, allMpg: [], numOfFills: 0 }));
 					// Call next form: Miles
 					loadMilesForm();
 				} else if (newCar == "" && existingCar != ""){
@@ -102,7 +103,8 @@
 						if (element.name === existingCar){
 							var car = {
 								name: element.name,
-								mpg: element.mpg,
+								avgMpg: element.avgMpg,
+								allMpg: element.allMpg,
 								numOfFills: element.numOfFills
 							};
 							// Save existing car to localStorage
@@ -192,34 +194,71 @@
 				} else {
 					// Clear error message if it exists
 					document.getElementById("errors").innerHTML = "";
-
 					//Grab exisitng mpg item
 					var mpg = JSON.parse(localStorage.getItem('mpg'));
 					// Update gallons
-                    mpg.gallons = gallons;
-                                
-	            	// Gallons are valid. Save in local storage
+                    			mpg.gallons = gallons;
+	            			// Gallons are valid. Save in local storage
 					localStorage.setItem('mpg', JSON.stringify(mpg));
-
 					// Load next view: Calculating
 					loadCalculatingView();	
 				}
 			}
 			// This function will load the "Calculating" screen for 3 seconds then call the display screen 
-            function loadCalculatingView(){
-           		// Replace the content on the page
-            	document.getElementById("content").innerHTML = "<h2> Calculating</h2>";
-                // Remove next button (no longer needed)
-                var next = document.getElementById('next');
-                next.parentNode.removeChild(next);
+            		function loadCalculatingView(){
+           			// Replace the content on the page
+		            	document.getElementById("content").innerHTML = "<h2> Calculating</h2>";
+		                // Remove next button (no longer needed)
+		                var next = document.getElementById('next');
+		                next.parentNode.removeChild(next);
+		
+		                // Start timer for 3 seconds, then load next view: display
+		            	setTimeout(function(){displayResults();},3000);
+                             	
+		         } 
+		         // This function will calculate and then output the mpg to the screen.
+		         function displayResults(){
+                                var dbCars = localStorage.getItem('dbCars');
+                                // Get selected car out of storage
+				var selectedCar = JSON.parse(localStorage.getItem('selectedCar'));
+                              // Grab inputted miles
+				var mpg = JSON.parse(localStorage.getItem('mpg'));
 
-                // Start timer for 3 seconds, then load next view: display
-            	setTimeout(function(){displayResults();},3000);
-            } 
-            // This function will calculate and then output the mpg to the screen.
-            function displayResults(){
-            	//pull local storage on mpg and selectedCar,save into var, 
-            }
+				var currentMpg = mpg.miles / mpg.gallons;
+
+				selectedCar.allMpg.push(currentMpg);
+
+				var averageMpg;
+
+				selectedCar.numOfFills += 1;
+
+				for (var i = 0; i < selectedCar.allMpg.length; i++){
+					averageMpg += selectedCar.allMpg[i];
+				}
+
+				averageMpg /= selectedCar.numOfFills;
+
+				selectedCar.avgMpg = averageMpg;
+
+				// Save back to local storage
+				localStorage.setItem('selectedCar', JSON.stringify(selectedCar));
+
+				for (var i = 0; i < dbCars.carNames.length; i++){
+					if (dbCars.carNames[i].name == selectedCar.name){
+						dbCars.carNames[i] = selectedCar;
+					}
+				}
+				
+				// Display results
+				document.getElementById('content').innerHTML = "<h2> Current MPG for " + 
+					selectedCar.name + "</h2>" +
+					"<p id='currentMpg'>" + currentMpg + "</p>" +
+					"<h2> Average MPG Overall </h2>" +
+					"<p id='averageMpg'>" + averageMpg + "</p>";
+                  
+    }
+			
+		         
                   
 		</script>
 	</head>
@@ -241,7 +280,7 @@
 		</div>
 		<br>
 		<input type="button" id="next" onclick="selectCar()" value="Next"/>
-        <script type="text/javascript">
+        	<script type="text/javascript">
 			loadExistingCars();
 		</script>
 	</body>
