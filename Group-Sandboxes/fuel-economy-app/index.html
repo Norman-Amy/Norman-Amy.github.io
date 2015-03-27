@@ -218,7 +218,7 @@
 		         } 
 		         // This function will calculate and then output the mpg to the screen.
 		         function displayResults(){
-                                var dbCars = localStorage.getItem('dbCars');
+                                var dbCars = loadLocalStorage();
                                 // Get selected car out of storage
 				var selectedCar = JSON.parse(localStorage.getItem('selectedCar'));
                               // Grab inputted miles
@@ -243,7 +243,6 @@
 				// Save back to local storage
 				localStorage.setItem('selectedCar', JSON.stringify(selectedCar));
 
-				console.log(dbCars);
 				for (var i = 0; i < dbCars.carNames.length; i++){
 					if (dbCars.carNames[i].name == selectedCar.name){
 						dbCars.carNames[i] = selectedCar;
