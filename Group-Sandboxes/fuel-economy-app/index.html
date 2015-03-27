@@ -226,7 +226,6 @@
 
 				var currentMpg = mpg.miles / mpg.gallons;
 
-				console.log(selectedCar);
 				selectedCar.allMpg.push(currentMpg);
 
 				var averageMpg;
@@ -244,6 +243,7 @@
 				// Save back to local storage
 				localStorage.setItem('selectedCar', JSON.stringify(selectedCar));
 
+				console.log(dbCars);
 				for (var i = 0; i < dbCars.carNames.length; i++){
 					if (dbCars.carNames[i].name == selectedCar.name){
 						dbCars.carNames[i] = selectedCar;
