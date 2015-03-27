@@ -244,10 +244,10 @@
 				localStorage.setItem('selectedCar', JSON.stringify(selectedCar));
 
 				for (var i = 0; i < dbCars.carNames.length; i++){
-					console.log(dbCars.carNames[i]);
 					if (dbCars.carNames[i].name == selectedCar.name){
-						console.log('Updated');
-						dbCars.carNames[i] = selectedCar;
+						dbCars.carNames[i].numOfFills++;
+						dbCars.carNames[i].allMpg.push(currentMpg);
+						dbCars.carNames[i].avgMpg = averageMpg;
 					}
 				}
 				
