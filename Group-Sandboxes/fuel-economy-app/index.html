@@ -185,7 +185,7 @@
 			// This function will save the inputted gallons and then call the next form to load
 			function saveGallons(){
 				// Grab inputted gallons
-				var gallons = parseInt(document.gallonsForm.gallons.value);
+				var gallons = parseFloat(document.gallonsForm.gallons.value);
 				// Verify that gallons is inputted properly
 				if (isNaN(gallons) || gallons === null || gallons === undefined || gallons <= 0){
 					// Prompt user to re-input miles
@@ -205,43 +205,53 @@
 				}
 			}
 			// This function will load the "Calculating" screen for 3 seconds then call the display screen 
-            		function loadCalculatingView(){
-           			// Replace the content on the page
-		            	document.getElementById("content").innerHTML = "<h2> Calculating</h2>";
-		                // Remove next button (no longer needed)
-		                var next = document.getElementById('next');
-		                next.parentNode.removeChild(next);
+			function loadCalculatingView(){
+				// Replace the content on the page
+				document.getElementById("content").innerHTML = "<h2> Calculating</h2>";
+				// Remove next button (no longer needed)
+				var next = document.getElementById('next');
+				next.parentNode.removeChild(next);
 		
-		                // Start timer for 3 seconds, then load next view: display
-		            	setTimeout(function(){displayResults();},3000);
-                             	
-		         } 
-		         // This function will calculate and then output the mpg to the screen.
-		         function displayResults(){
-                                var dbCars = loadLocalStorage();
-                                // Get selected car out of storage
+				// Start timer for 3 seconds, then load next view: display
+				setTimeout(function(){displayResults();},3000);               	
+			} 
+			// This function will calculate and then output the mpg to the screen.
+			function displayResults(){
+				var dbCars = loadLocalStorage();
+				// Get selected car out of storage
 				var selectedCar = JSON.parse(localStorage.getItem('selectedCar'));
-                              // Grab inputted miles
+				// Grab inputted miles
 				var mpg = JSON.parse(localStorage.getItem('mpg'));
 
+				// Calculate the current MPG to the tenths place.
 				var currentMpg = mpg.miles / mpg.gallons;
+				currentMpg = currentMpg * 100;
+				currentMpg = Math.round(currentMpg) / 100;
 
+				// Add current average to list of total averages.
 				selectedCar.allMpg.push(currentMpg);
+
 
 				var averageMpg = 0;
 
-				selectedCar.numOfFills += 1;
-
+				// For every time the MPG has been calculated, add it to the sum
 				for (var i = 0; i < selectedCar.allMpg.length; i++){
 					averageMpg += selectedCar.allMpg[i];
 				}
 
+
+				// Increase the number of times this car has been filled.
+				selectedCar.numOfFills += 1;
+
+				// Divide the sum by the number of total fills. Then round to the tenths place
 				averageMpg /= selectedCar.numOfFills;
 				averageMpg = averageMpg * 100;
 				averageMpg = Math.round(averageMpg) / 100;
 
+				// Set Selected car's average
 				selectedCar.avgMpg = averageMpg;
 
+				// Loop through list of cars. Once found, save the changes into the array
 				for (var i = 0; i < dbCars.carNames.length; i++){
 					if (dbCars.carNames[i].name == selectedCar.name){
 						dbCars.carNames[i] = selectedCar;
@@ -258,8 +268,7 @@
 					"<p id='currentMpg'>" + currentMpg + "</p>" +
 					"<h2> Average MPG Overall </h2>" +
 					"<p id='averageMpg'>" + averageMpg + "</p>";
-                  
-    }
+			}
 			
 		         
                   
