@@ -240,16 +240,15 @@
 
 				selectedCar.avgMpg = averageMpg;
 
-				// Save back to local storage
-				localStorage.setItem('selectedCar', JSON.stringify(selectedCar));
-
 				for (var i = 0; i < dbCars.carNames.length; i++){
 					if (dbCars.carNames[i].name == selectedCar.name){
-						dbCars.carNames[i].numOfFills++;
-						dbCars.carNames[i].allMpg.push(currentMpg);
-						dbCars.carNames[i].avgMpg = averageMpg;
+						dbCars.carNames[i] = selectedCar;
 					}
 				}
+
+				// Save back to local storage
+				localStorage.setItem('selectedCar', JSON.stringify(selectedCar));
+				localStorage.setItem('dbCars', JSON.stringify(dbCars));
 				
 				// Display results
 				document.getElementById('content').innerHTML = "<h2> Current MPG for " + 
