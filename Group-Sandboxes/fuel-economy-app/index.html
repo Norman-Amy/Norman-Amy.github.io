@@ -237,6 +237,8 @@
 				}
 
 				averageMpg /= selectedCar.numOfFills;
+				averageMpg = averageMpg * 100;
+				averageMpg = Math.round(averageMpg) / 100;
 
 				selectedCar.avgMpg = averageMpg;
 
