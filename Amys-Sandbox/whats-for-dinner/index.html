@@ -79,30 +79,10 @@
 				loadCurrentList();
 			}
 
-			function loadMenuTable(){
-				var xmlhttp;
-				if (window.XMLHttpRequest){
-				  	// code for IE7+, Firefox, Chrome, Opera, Safari
-				  	xmlhttp=new XMLHttpRequest();
-				} else {
-				  	// code for IE6, IE5
-					xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-				}
-				xmlhttp.onreadystatechange=function() {
-					// If the document successfully loaded, display contents
-					if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-						// Display miles form on page
-					   	document.getElementById("content").innerHTML = xmlhttp.responseText;
-					}
-				}
-				xmlhttp.open("GET","menu.html",true);
-				xmlhttp.send();
-
-				generateTheMenu();
-			}
 
 			function generateTheMenu(){
 				if (loadFromStorage()){
+					loadMenuTable();
 
 					var list = loadFromStorage();
 
@@ -134,7 +114,7 @@
 								break;
 						}
 
-						document.getElementById('menu').menuTable.innerHTML += "<tr><td>" 
+						document.getElementById('menu').innerHTML += "<tr><td>" 
 							+ day + "</td><td>" 
 							+ list.items[i] + "</td></tr>";
 					}
@@ -143,7 +123,25 @@
 				}
 			}
 
-			
+			function loadMenuTable(){
+				var xmlhttp;
+				if (window.XMLHttpRequest){
+				  	// code for IE7+, Firefox, Chrome, Opera, Safari
+				  	xmlhttp=new XMLHttpRequest();
+				} else {
+				  	// code for IE6, IE5
+					xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+				}
+				xmlhttp.onreadystatechange=function() {
+					// If the document successfully loaded, display contents
+					if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+						// Display miles form on page
+					   	document.getElementById("content").innerHTML = xmlhttp.responseText;
+					}
+				}
+				xmlhttp.open("GET","menu.html",true);
+				xmlhttp.send();
+			}
 
 
 		</script>
@@ -182,7 +180,7 @@
 			<h2>Generate Menu</h2>
 			<p id="error"></p>
 			<form name="generateMenu">
-				<button type="button" id="generate" onclick="loadMenuTable()">See this Week's Menu</button>
+				<button type="button" id="generate" onclick="generateTheMenu()">See this Week's Menu</button>
 			</form>
 			
 		</div>
