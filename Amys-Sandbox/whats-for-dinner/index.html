@@ -82,9 +82,9 @@
 
 			function generateTheMenu(){
 				if (loadFromStorage()){
-					loadMenuTable();
+					// loadMenuTable();
 					// LoadMenuTable is not returning HTML properly. Manually create it:
-					//document.getElementById('content').innerHTML = "";
+					document.getElementById('content').innerHTML = "<p id='menu'><p>";
 
 					var list = loadFromStorage();
 
