@@ -82,16 +82,16 @@
 
 			function generateTheMenu(){
 				if (loadFromStorage()){
-					// loadMenuTable();
+					loadMenuTable();
 					// LoadMenuTable is not returning HTML properly. Manually create it:
-					document.getElementById('content').innerHTML = "<p id='menu'><p>";
+					//document.getElementById('content').innerHTML = "";
 
 					var list = loadFromStorage();
 
 					//shuffle array and display first 7 elements that appear
 					var menu = shuffle(list.items, list.items.length);
 
-					for (var i = 0; i < menu.length; i++){
+					for (var i = 0; i < 7; i++){
 						var day;
 
 						switch (i){
@@ -117,9 +117,13 @@
 								day = "Saturday";
 								break;
 						}
-
-						document.getElementById('menu').innerHTML += day + ": " 
+						if (menu[i]){
+							document.getElementById('menu').innerHTML += day + ": " 
 							+ menu[i] + "<br>";
+						} else {
+							document.getElementById('menu').innerHTML += day + ": Nothing";
+						}
+						
 					}
 				} else {
 					document.getElementById('error').innerHTML = "Nothing to create menu from.";
