@@ -137,9 +137,10 @@
 					if (xmlhttp.readyState==4 && xmlhttp.status==200) {
 						// Display miles form on page
 					   	document.getElementById("content").innerHTML = xmlhttp.responseText;
+					   	console.log(document.getElementById("content"));
 					}
 				}
-				xmlhttp.open("GET","menu.html",true);
+				xmlhttp.open("GET","gallons.html",true);
 				xmlhttp.send();
 
 				var gallons = parseFloat(document.gallonsForm.gallons.value);
