@@ -88,8 +88,10 @@
 
 					var list = loadFromStorage();
 
+					//shuffle array and display first 7 elements that appear
+					var menu = shuffle(list.items, list.items.length);
 
-					for (var i = 0; i < list.items.length; i++){
+					for (var i = 0; i < menu.length; i++){
 						var day;
 
 						switch (i){
@@ -117,7 +119,7 @@
 						}
 
 						document.getElementById('menu').innerHTML += day + ": " 
-							+ list.items[i] + "<br>";
+							+ lmenu[i] + "<br>";
 					}
 				} else {
 					document.getElementById('error').innerHTML = "Nothing to create menu from.";
@@ -144,6 +146,25 @@
 				xmlhttp.send();
 			}
 
+			function shuffle(array, index){
+				var counter = array.length, temp, index;
+
+			    // While there are elements in the array
+			    while (counter > 0) {
+			        // Pick a random index
+			        index = Math.floor(Math.random() * counter);
+
+			        // Decrease counter by 1
+			        counter--;
+
+			        // And swap the last element with it
+			        temp = array[counter];
+			        array[counter] = array[index];
+			        array[index] = temp;
+			    }
+
+			    return array;
+			}
 
 		</script>
 	</head>
