@@ -84,7 +84,7 @@
 				if (loadFromStorage()){
 					// loadMenuTable();
 					// LoadMenuTable is not returning HTML properly. Manually create it:
-					document.getElementById('content').innerHTML = "<p id='menu'><table name='menuTable'></table><p>";
+					document.getElementById('content').innerHTML = "<p id='menu'><p>";
 
 					var list = loadFromStorage();
 
@@ -116,9 +116,8 @@
 								break;
 						}
 
-						document.getElementById('menu').menuTable.innerHTML += "<tr><td>" 
-							+ day + "</td><td>" 
-							+ list.items[i] + "</td></tr>";
+						document.getElementById('menu').innerHTML += day + ": " 
+							+ list.items[i] + "<br>";
 					}
 				} else {
 					document.getElementById('error').innerHTML = "Nothing to create menu from.";
