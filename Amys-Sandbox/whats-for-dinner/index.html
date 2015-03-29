@@ -82,11 +82,13 @@
 
 			function generateTheMenu(){
 				if (loadFromStorage()){
-					loadMenuTable();
+					// loadMenuTable();
+					// LoadMenuTable is not returning HTML properly. Manually create it:
+					document.getElementById('content').innerHTML = "<section name='menu'><table name='menuTable'></table></section>";
 
 					var list = loadFromStorage();
 
-					console.log(document.getElementById("content").gallonsForm);
+
 					for (var i = 0; i < list.items.length; i++){
 						var day;
 
@@ -114,7 +116,7 @@
 								break;
 						}
 
-						document.menu.innerHTML += "<tr><td>" 
+						document.menu.menuTable.innerHTML += "<tr><td>" 
 							+ day + "</td><td>" 
 							+ list.items[i] + "</td></tr>";
 					}
@@ -137,14 +139,10 @@
 					if (xmlhttp.readyState==4 && xmlhttp.status==200) {
 						// Display miles form on page
 					   	document.getElementById("content").innerHTML = xmlhttp.responseText;
-					   	console.log(document.getElementById("content")[0]);
 					}
 				}
-				xmlhttp.open("GET","gallons.html",true);
+				xmlhttp.open("GET","menu.html",true);
 				xmlhttp.send();
-
-				var gallons = parseFloat(document.gallonsForm.gallons.value);
-				console.log(gallons);
 			}
 
 
