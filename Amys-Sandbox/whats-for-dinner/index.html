@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> What's for Dinner? </title>
+		<meta name="Author" content="Amy Norman">
+
+		<!--<link rel="stylesheet" href="whats-for-dinner.css"/>-->
+		<script type="text/javascript">
+
+			function loadCurrentList(){
+
+				if (loadFromStorage() != null){
+					var list = loadFromStorage();
+
+					for (var i = 0; i < list.items.length; i++){
+						var option = document.createElement('OPTION');
+						document.viewList.dinnerList.appendChild(option);
+
+						var currentOption = document.viewList.dinnerList[i];
+
+						currentOption.innerHTML = list.items[i];
+						currentOption.setAttribute('name', 'dinnerList');
+						currentOption.setAttribute('value', list.items[i]);
+					}
+
+					//Copy list to remove item form
+					document.removeItem.dinnerList.innerHTML = document.viewList.dinnerList.innerHTML;
+
+				} else {
+					document.viewList.innerHTML = "No items exist";
+					document.removeItem.innerHTML = "No items to remove";
+				}
+			}
+
+			function loadFromStorage(){
+				return JSON.parse(localStorage.getItem('list'));
+			}
+
+
+			function addNewItem(){
+				var newItem = document.addItem.newItem.value;
+
+				if (loadFromStorage()){
+					var list = loadFromStorage();
+
+					list.items.push(newItem);
+				} else {
+					var list = {
+						items: [newItem]
+					};
+				}
+
+				localStorage.setItem('list', JSON.stringify(list));
+
+				if (!document.viewList.dinnerList){
+					document.viewList.innerHTML = "<select name='dinnerList'></select>";
+					document.removeItem.innerHTML = "<select name='dinnerList'></select>" +
+					"<button type='button' id='remove' onclick='removeSelectedItem()'>Remove Item</button>";
+				}
+
+				loadCurrentList();
+			}
+
+			function removeSelectedItem(){
+				var selectedItem = document.removeItem.dinnerList.value;
+
+				var list = loadFromStorage();
+
+				// Find the selected element and remove it
+				var index = list.items.indexOf(selectedItem);
+				list.items.splice(index, 1);
+
+				if (list.items.length < 1){
+					localStorage.removeItem('list');
+				} else {
+					localStorage.setItem('list', JSON.stringify(list));
+				}
+
+				loadCurrentList();
+			}
+
+
+			function generateTheMenu(){
+				if (loadFromStorage()){
+					loadMenuTable();
+
+					var list = loadFromStorage();
+
+					for (var i = 0; i < list.items.length; i++){
+						var day;
+
+						switch (i){
+							case 0:
+								day = "Sunday";
+								break;
+							case 1:
+								day = "Monday";
+								break;
+							case 2:
+								day = "Tuesday";
+								break;
+							case 3:
+								day = "Wednesday";
+								break;
+							case 4:
+								day = "Thursday";
+								break;
+							case 5:
+								day = "Friday";
+								break;
+							case 6:
+								day = "Saturday";
+								break;
+						}
+
+						document.menu.menuTable.innerHTML += "<tr><td>" + day + "</td><td>" 
+							+ list.items[i] + "</td></tr>";
+					}
+				} else {
+					document.getElementById('error').innerHTML = "Nothing to create menu from.";
+				}
+			}
+
+			function loadMenuTable(){
+				var xmlhttp;
+				if (window.XMLHttpRequest){
+				  	// code for IE7+, Firefox, Chrome, Opera, Safari
+				  	xmlhttp=new XMLHttpRequest();
+				} else {
+				  	// code for IE6, IE5
+					xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+				}
+				xmlhttp.onreadystatechange=function() {
+					// If the document successfully loaded, display contents
+					if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+						// Display miles form on page
+					   	document.getElementById("content").innerHTML = xmlhttp.responseText;
+					}
+				}
+				xmlhttp.open("GET","menu.html",true);
+				xmlhttp.send();
+			}
+
+
+		</script>
+	</head>
+	<body>
+		<header>
+			<nav>
+				<a href="http://norman-amy.github.io/" title="Home Page">Home</a> &gt; What's for Dinner?
+			</nav>
+		</header>
+		<h1> What's for Dinner? </h1>
+		<div id="content">
+			<h2>Current List</h2>
+
+			<form name="viewList">
+				<select name="dinnerList">
+				</select>
+			</form>
+
+			<h2>Add Item to List</h2>
+
+			<form name="addItem">
+				<label for="newItem">New Item: </label>
+				<input type="text" name="newItem" required/><br>
+				<button type="button" id="button" onclick="addNewItem()">Add To List</button>
+			</form>
+
+			<h2>Remove Item from List</h2>
+
+			<form name="removeItem">
+				<select name="dinnerList">
+				</select>
+				<button type="button" id="remove" onclick="removeSelectedItem()">Remove Item</button>
+			</form>
+
+			<h2>Generate Menu</h2>
+			<p id="error"></p>
+			<form name="generateMenu">
+				<button type="button" id="generate" onclick="generateTheMenu()">See this Week's Menu</button>
+			</form>
+			
+		</div>
+		<script type="text/javascript">
+			loadCurrentList();
+		</script>
+	</body>
+</html>
