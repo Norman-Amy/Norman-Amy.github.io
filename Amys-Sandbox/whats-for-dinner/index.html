@@ -30,6 +30,14 @@
 					document.viewList.innerHTML = "No items exist";
 					document.removeItem.innerHTML = "No items to remove";
 				}
+
+				if(loadCurrentMenu()){
+					var button = document.createElement('BUTTON');
+					button.setAttribute('type', 'button');
+					button.setAttribute('onclick', viewMenu);
+					button.innerHTML="View Current Menu";
+					document.generateMenu.appendChild(button);
+				}
 			}
 
 			function loadFromStorage(){
@@ -125,6 +133,21 @@
 						}
 						
 					}
+
+
+					var currentMenu = {
+						Sunday: menu[0],
+						Monday: menu[1],
+						Tuesday: menu[2],
+						Wednesday: menu[3],
+						Thursday: menu[4],
+						Friday: menu[5],
+						Saturday: menu[6]
+					};
+
+					// Save menu into local storage
+					localStorage.setItem('currentMenu', JSON.stringify(menu));
+
 				} else {
 					document.getElementById('error').innerHTML = "Nothing to create menu from.";
 				}
@@ -168,6 +191,14 @@
 			    }
 
 			    return array;
+			}
+
+			function loadCurrentMenu(){
+				return JSON.parse(localStorage.getItem('currentMenu'));
+			}
+
+			function viewMenu(){
+				console.log('hello!');
 			}
 
 		</script>
