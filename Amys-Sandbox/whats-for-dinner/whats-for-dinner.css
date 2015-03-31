@@ -6,6 +6,23 @@ body {
 	margin: auto;
 }
 
+#content {
+	border: 1px solid #a3c63c;
+	border-radius: 6px;
+	padding: 0 15px 15px 15px;
+}
+
+h2, h3 {
+	padding-top: 10px;
+}
+
+input, select {
+	padding: 2px;
+	height: 30px;
+	width: 100px;
+	border-radius: 6px;
+}
+
 button {
 	border: 1px solid #D2D2D2;
 	border-radius: 6px;
