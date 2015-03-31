@@ -1,0 +1,15 @@
+body {
+	vertical-align:center;
+	font-family:verdana;
+	font-size: 12pt;
+	width: 80%;
+	margin: auto;
+}
+
+button {
+	border: 1px solid #D2D2D2;
+	border-radius: 6px;
+	padding: 5px;
+	margin-top: 10px;
+	font-family: tahoma;
+}
