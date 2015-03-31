@@ -4,14 +4,17 @@
 		<title> What's for Dinner? </title>
 		<meta name="Author" content="Amy Norman">
 
-		<!--<link rel="stylesheet" href="whats-for-dinner.css"/>-->
+		<link rel="stylesheet" href="whats-for-dinner.css"/>
 		<script type="text/javascript">
 
 			function loadCurrentList(){
 
 				if (loadFromStorage() != null){
-					var list = loadFromStorage();
+					document.viewList.dinnerList.innerHTML = '';
+					document.removeItem.dinnerList.innerHTML = '';
 
+					var list = loadFromStorage();
+					console.log(list.items.length);
 					for (var i = 0; i < list.items.length; i++){
 						var option = document.createElement('OPTION');
 						document.viewList.dinnerList.appendChild(option);
@@ -31,10 +34,11 @@
 					document.removeItem.innerHTML = "No items to remove";
 				}
 
-				if(loadCurrentMenu()){
+				if(loadCurrentMenu() && !document.getElementById('currentMenu')){
 					var button = document.createElement('BUTTON');
 					button.setAttribute('type', 'button');
-					button.setAttribute('onclick', viewMenu);
+					button.setAttribute('id', 'currentMenu');
+					button.setAttribute('onclick', 'viewMenu()');
 					button.innerHTML="View Current Menu";
 					document.generateMenu.appendChild(button);
 				}
@@ -90,6 +94,10 @@
 
 			function generateTheMenu(){
 				if (loadFromStorage()){
+					var content = document.getElementById("content");
+
+					saveContent(content.innerHTML);
+
 					// loadMenuTable();
 					// LoadMenuTable is not returning HTML properly. Manually create it:
 					document.getElementById('content').innerHTML = "<p id='menu'><p>";
@@ -125,15 +133,17 @@
 								day = "Saturday";
 								break;
 						}
-						if (menu[i]){
-							document.getElementById('menu').innerHTML += day + ": " 
-							+ menu[i] + "<br>";
-						} else {
-							document.getElementById('menu').innerHTML += day + ": Nothing<br>";
+
+						if (!menu[i]){
+							menu[i] = "Nothing";
 						}
+
+						document.getElementById('menu').innerHTML += day + ": " 
+							+ menu[i] + "<br>";
 						
 					}
 
+					document.getElementById('menu').innerHTML += "<button type='button' onclick='mainMenu()'>Back</button>";
 
 					var currentMenu = {
 						Sunday: menu[0],
@@ -146,32 +156,33 @@
 					};
 
 					// Save menu into local storage
-					localStorage.setItem('currentMenu', JSON.stringify(menu));
+					localStorage.setItem('currentMenu', JSON.stringify(currentMenu));
 
 				} else {
 					document.getElementById('error').innerHTML = "Nothing to create menu from.";
 				}
 			}
 
-			function loadMenuTable(){
-				var xmlhttp;
-				if (window.XMLHttpRequest){
-				  	// code for IE7+, Firefox, Chrome, Opera, Safari
-				  	xmlhttp=new XMLHttpRequest();
-				} else {
-				  	// code for IE6, IE5
-					xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-				}
-				xmlhttp.onreadystatechange=function() {
-					// If the document successfully loaded, display contents
-					if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-						// Display miles form on page
-					   	document.getElementById("content").innerHTML = xmlhttp.responseText;
-					}
-				}
-				xmlhttp.open("GET","menu.html",true);
-				xmlhttp.send();
-			}
+			// AJAX not working properly
+			// function loadMenuTable(){
+			// 	var xmlhttp;
+			// 	if (window.XMLHttpRequest){
+			// 	  	// code for IE7+, Firefox, Chrome, Opera, Safari
+			// 	  	xmlhttp=new XMLHttpRequest();
+			// 	} else {
+			// 	  	// code for IE6, IE5
+			// 		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+			// 	}
+			// 	xmlhttp.onreadystatechange=function() {
+			// 		// If the document successfully loaded, display contents
+			// 		if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+			// 			// Display miles form on page
+			// 		   	document.getElementById("content").innerHTML = xmlhttp.responseText;
+			// 		}
+			// 	}
+			// 	xmlhttp.open("GET","menu.html",true);
+			// 	xmlhttp.send();
+			// }
 
 			function shuffle(array, index){
 				var counter = array.length, temp, index;
@@ -198,7 +209,30 @@
 			}
 
 			function viewMenu(){
-				console.log('hello!');
+				var currentMenu = loadCurrentMenu();
+
+				var content = document.getElementById("content");
+
+				saveContent(content.innerHTML);
+				
+				content.innerHTML = "<h2>This week's Menu</h2>";
+
+				content.innerHTML += "Sunday: " + currentMenu['Sunday'] + "<br>" 
+					+ "Monday: " + currentMenu['Monday'] + "<br>"
+					+ "Tuesday: " + currentMenu['Tuesday'] + "<br>"
+					+ "Wednesday: " + currentMenu['Wednesday'] + "<br>"
+					+ "Thursday: " + currentMenu['Thursday'] + "<br>"
+					+ "Friday: " + currentMenu['Friday'] + "<br>"
+					+ "Saturday: " + currentMenu['Saturday'] + "<br>";
+				content.innerHTML += "<button type='button' onclick='mainMenu()'>Back</button>";
+			}
+
+			function saveContent(content){
+				localStorage.setItem('content', content);
+			}
+			function mainMenu(){
+				document.getElementById("content").innerHTML = localStorage.getItem('content'); 
+				loadCurrentList();
 			}
 
 		</script>
@@ -234,10 +268,10 @@
 				<button type="button" id="remove" onclick="removeSelectedItem()">Remove Item</button>
 			</form>
 
-			<h2>Generate Menu</h2>
+			<h2>What's on the Menu:</h2>
 			<p id="error"></p>
 			<form name="generateMenu">
-				<button type="button" id="generate" onclick="generateTheMenu()">See this Week's Menu</button>
+				<button type="button" id="generate" onclick="generateTheMenu()">Generate New Menu</button>
 			</form>
 			
 		</div>
