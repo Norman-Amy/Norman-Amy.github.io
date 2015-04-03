@@ -119,7 +119,8 @@
 					// Preserve the main menu for if the user hits a "back" button and AJAX doesn work
 					saveContent(content.innerHTML);
 
-					document.getElementById('content').innerHTML = "<p id='menu'><p>";
+					document.getElementById('content').innerHTML = "<h3>New Menu</h3>"
+						+ "<table class='menu' id='new'>";
 
 					var list = loadFromStorage();
 
@@ -128,31 +129,8 @@
 
 					// Create a new menu for a week (Sunday through Saturday)
 					for (var i = 0; i < 7; i++){
-						var day;
 						// Determine the day of the week based on the current index of the array
-						switch (i){
-							case 0:
-								day = "Sunday";
-								break;
-							case 1:
-								day = "Monday";
-								break;
-							case 2:
-								day = "Tuesday";
-								break;
-							case 3:
-								day = "Wednesday";
-								break;
-							case 4:
-								day = "Thursday";
-								break;
-							case 5:
-								day = "Friday";
-								break;
-							case 6:
-								day = "Saturday";
-								break;
-						}
+						var day = whatsToday(i);
 
 						// If we run out of things to put on the menu, then the people eat nothing
 						if (!menu[i]){
@@ -160,13 +138,16 @@
 						}
 
 						// Display the menu row by row
-						document.getElementById('menu').innerHTML += day + ": " 
-							+ menu[i] + "<br>";
+						document.getElementById('new').innerHTML += "<tr><td>" + day + "</td><td>" 
+							+ menu[i] + "<td></tr>";
 						
 					}
 
+					document.getElementById('new').innerHTML += "</table>"
+
 					// Add a back button for this view.
-					document.getElementById('menu').innerHTML += "<button type='button' onclick='loadMainXML()'>Back</button>";
+					document.getElementById('new').innerHTML += "<button type='button' onclick='loadMainXML()'>"
+						+ "Back</button>";
 
 					// Create the current menu based on the one just generated.
 					var currentMenu = {
@@ -186,6 +167,35 @@
 					// Throw an error that no list items exist
 					document.getElementById('error').innerHTML = "Nothing to create menu from.";
 				}
+			}
+
+			function whatsToday(num){
+				var day;
+				// Find what day corresponds to the number passed in.
+				switch (num){
+					case 0:
+						day = "Sunday";
+						break;
+					case 1:
+						day = "Monday";
+						break;
+					case 2:
+						day = "Tuesday";
+						break;
+					case 3:
+						day = "Wednesday";
+						break;
+					case 4:
+						day = "Thursday";
+						break;
+					case 5:
+						day = "Friday";
+						break;
+					case 6:
+						day = "Saturday";
+						break;
+				}
+				return day;
 			}
 
 			function shuffle(array, index){
@@ -222,15 +232,18 @@
 				// Save the main menu into storage for the 'back' button to access
 				saveContent(content.innerHTML);
 				
-				content.innerHTML = "<h2>This week's Menu</h2>";
 				// Create menu
-				content.innerHTML += "Sunday: " + currentMenu['Sunday'] + "<br>" 
-					+ "Monday: " + currentMenu['Monday'] + "<br>"
-					+ "Tuesday: " + currentMenu['Tuesday'] + "<br>"
-					+ "Wednesday: " + currentMenu['Wednesday'] + "<br>"
-					+ "Thursday: " + currentMenu['Thursday'] + "<br>"
-					+ "Friday: " + currentMenu['Friday'] + "<br>"
-					+ "Saturday: " + currentMenu['Saturday'] + "<br>";
+				content.innerHTML = "<h2>This week's Menu</h2>"
+					+ "<table class='menu' id='current'>";
+
+				for (var i = 0; i < 7; i++){
+					var day = whatsToday(i);
+					// Output rows and columns of table
+					content.innerHTML += "<tr><td>" + day + "</td><td>" + currentMenu[day] + "</td></tr>";
+				}
+
+				content.innerHTML += "</table>";
+				
 				content.innerHTML += "<button type='button' onclick='loadMainXML()'>Back</button>";
 			}
 
@@ -250,7 +263,7 @@
 					if (xmlhttp.readyState==4 && xmlhttp.status==200) {
 						// Display miles form on page
 					   	document.getElementById("content").innerHTML = xmlhttp.responseText;
-					   	console.log('AJAX successful');
+
 					   	// Load current list to populate drop down menus
 					   	loadCurrentList();
 					}
