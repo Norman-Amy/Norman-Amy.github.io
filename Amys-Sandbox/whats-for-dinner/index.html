@@ -119,7 +119,7 @@
 					// Preserve the main menu for if the user hits a "back" button and AJAX doesn work
 					saveContent(content.innerHTML);
 
-					document.getElementById('content').innerHTML = "<h3>New Menu</h3>"
+					var table = "<h3>New Menu</h3>"
 						+ "<table class='menu' id='new'>";
 
 					var list = loadFromStorage();
@@ -138,16 +138,18 @@
 						}
 
 						// Display the menu row by row
-						document.getElementById('new').innerHTML += "<tr><td>" + day + "</td><td>" 
+						table += "<tr><td>" + day + "</td><td>" 
 							+ menu[i] + "<td></tr>";
 						
 					}
 
-					document.getElementById('new').innerHTML += "</table>"
+					table += "</table>"
 
 					// Add a back button for this view.
-					document.getElementById('new').innerHTML += "<button type='button' onclick='loadMainXML()'>"
+					table += "<button type='button' onclick='loadMainXML()'>"
 						+ "Back</button>";
+
+					document.getElementById('content').innerHTML = table;
 
 					// Create the current menu based on the one just generated.
 					var currentMenu = {
@@ -238,7 +240,7 @@
 
 				for (var i = 0; i < 7; i++){
 					var day = whatsToday(i);
-					console.log(day);
+
 					// Output rows and columns of table
 					table += "<tr><td>" + day + "</td><td>" + currentMenu[day] + "</td></tr>";
 				}
