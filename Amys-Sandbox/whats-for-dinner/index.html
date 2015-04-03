@@ -8,13 +8,16 @@
 		<script type="text/javascript">
 
 			function loadCurrentList(){
-
+				// If there is a list in local storage, populate a drop down menu.
 				if (loadFromStorage() != null){
+					// Reset list if it already exists.
 					document.viewList.dinnerList.innerHTML = '';
 					document.removeItem.dinnerList.innerHTML = '';
 
+					// Grab the list from local storage
 					var list = loadFromStorage();
-					console.log(list.items.length);
+
+					// Loop through list to create options for drop down.
 					for (var i = 0; i < list.items.length; i++){
 						var option = document.createElement('OPTION');
 						document.viewList.dinnerList.appendChild(option);
@@ -30,50 +33,63 @@
 					document.removeItem.dinnerList.innerHTML = document.viewList.dinnerList.innerHTML;
 
 				} else {
+					// No list exists, so display message
 					document.viewList.innerHTML = "No items exist";
 					document.removeItem.innerHTML = "No items to remove";
 				}
 
+				// If a current menu exists and a current menu button does not, create a new button
 				if(loadCurrentMenu() && !document.getElementById('currentMenu')){
 					var button = document.createElement('BUTTON');
+
 					button.setAttribute('type', 'button');
 					button.setAttribute('id', 'currentMenu');
 					button.setAttribute('onclick', 'viewMenu()');
 					button.innerHTML="View Current Menu";
+
 					document.generateMenu.appendChild(button);
 				}
 			}
 
+			// Grab the list of dinner items from local storage
 			function loadFromStorage(){
 				return JSON.parse(localStorage.getItem('list'));
 			}
 
-
+			// Add a new item to list in local storage
 			function addNewItem(){
+				// Grab the value of the new item
 				var newItem = document.addItem.newItem.value;
 
+				// If the list exists, add the item
 				if (loadFromStorage()){
 					var list = loadFromStorage();
 
 					list.items.push(newItem);
 				} else {
+					// The list doesn't exist so create a new one.
 					var list = {
 						items: [newItem]
 					};
 				}
 
+				// Save changes to local storage
 				localStorage.setItem('list', JSON.stringify(list));
 
+				// If the dinnerList drop down menu didn't exist before, create it and the removeItem drop down
 				if (!document.viewList.dinnerList){
 					document.viewList.innerHTML = "<select name='dinnerList'></select>";
 					document.removeItem.innerHTML = "<select name='dinnerList'></select>" +
 					"<button type='button' id='remove' onclick='removeSelectedItem()'>Remove Item</button>";
 				}
 
+				// Re-create list for drop down
 				loadCurrentList();
 			}
 
+
 			function removeSelectedItem(){
+				// Grab the item to remove
 				var selectedItem = document.removeItem.dinnerList.value;
 
 				var list = loadFromStorage();
@@ -82,24 +98,27 @@
 				var index = list.items.indexOf(selectedItem);
 				list.items.splice(index, 1);
 
+				// If this was the last item on the list, delete the list entirely.
 				if (list.items.length < 1){
 					localStorage.removeItem('list');
 				} else {
+					// Save changes to local storage
 					localStorage.setItem('list', JSON.stringify(list));
 				}
 
+				// Re-create list for drop down
 				loadCurrentList();
 			}
 
 
 			function generateTheMenu(){
+				// If the list exists, create a menu
 				if (loadFromStorage()){
 					var content = document.getElementById("content");
 
+					// Preserve the main menu for if the user hits a "back" button and AJAX doesn work
 					saveContent(content.innerHTML);
 
-					// loadMenuTable();
-					// LoadMenuTable is not returning HTML properly. Manually create it:
 					document.getElementById('content').innerHTML = "<p id='menu'><p>";
 
 					var list = loadFromStorage();
@@ -107,9 +126,10 @@
 					//shuffle array and display first 7 elements that appear
 					var menu = shuffle(list.items, list.items.length);
 
+					// Create a new menu for a week (Sunday through Saturday)
 					for (var i = 0; i < 7; i++){
 						var day;
-
+						// Determine the day of the week based on the current index of the array
 						switch (i){
 							case 0:
 								day = "Sunday";
@@ -134,17 +154,21 @@
 								break;
 						}
 
+						// If we run out of things to put on the menu, then the people eat nothing
 						if (!menu[i]){
 							menu[i] = "Nothing";
 						}
 
+						// Display the menu row by row
 						document.getElementById('menu').innerHTML += day + ": " 
 							+ menu[i] + "<br>";
 						
 					}
 
-					document.getElementById('menu').innerHTML += "<button type='button' onclick='mainMenu()'>Back</button>";
+					// Add a back button for this view.
+					document.getElementById('menu').innerHTML += "<button type='button' onclick='loadMainXML()'>Back</button>";
 
+					// Create the current menu based on the one just generated.
 					var currentMenu = {
 						Sunday: menu[0],
 						Monday: menu[1],
@@ -159,30 +183,10 @@
 					localStorage.setItem('currentMenu', JSON.stringify(currentMenu));
 
 				} else {
+					// Throw an error that no list items exist
 					document.getElementById('error').innerHTML = "Nothing to create menu from.";
 				}
 			}
-
-			// AJAX not working properly
-			// function loadMenuTable(){
-			// 	var xmlhttp;
-			// 	if (window.XMLHttpRequest){
-			// 	  	// code for IE7+, Firefox, Chrome, Opera, Safari
-			// 	  	xmlhttp=new XMLHttpRequest();
-			// 	} else {
-			// 	  	// code for IE6, IE5
-			// 		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-			// 	}
-			// 	xmlhttp.onreadystatechange=function() {
-			// 		// If the document successfully loaded, display contents
-			// 		if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-			// 			// Display miles form on page
-			// 		   	document.getElementById("content").innerHTML = xmlhttp.responseText;
-			// 		}
-			// 	}
-			// 	xmlhttp.open("GET","menu.html",true);
-			// 	xmlhttp.send();
-			// }
 
 			function shuffle(array, index){
 				var counter = array.length, temp, index;
@@ -204,19 +208,22 @@
 			    return array;
 			}
 
+			// Load the current menu from local storage
 			function loadCurrentMenu(){
 				return JSON.parse(localStorage.getItem('currentMenu'));
 			}
 
+			// view the current menu
 			function viewMenu(){
 				var currentMenu = loadCurrentMenu();
 
 				var content = document.getElementById("content");
 
+				// Save the main menu into storage for the 'back' button to access
 				saveContent(content.innerHTML);
 				
 				content.innerHTML = "<h2>This week's Menu</h2>";
-
+				// Create menu
 				content.innerHTML += "Sunday: " + currentMenu['Sunday'] + "<br>" 
 					+ "Monday: " + currentMenu['Monday'] + "<br>"
 					+ "Tuesday: " + currentMenu['Tuesday'] + "<br>"
@@ -224,14 +231,49 @@
 					+ "Thursday: " + currentMenu['Thursday'] + "<br>"
 					+ "Friday: " + currentMenu['Friday'] + "<br>"
 					+ "Saturday: " + currentMenu['Saturday'] + "<br>";
-				content.innerHTML += "<button type='button' onclick='mainMenu()'>Back</button>";
+				content.innerHTML += "<button type='button' onclick='loadMainXML()'>Back</button>";
 			}
 
+
+			
+			function loadMainXML(){
+				var xmlhttp;
+				if (window.XMLHttpRequest){
+				  	// code for IE7+, Firefox, Chrome, Opera, Safari
+				  	xmlhttp=new XMLHttpRequest();
+				} else {
+				  	// code for IE6, IE5
+					xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+				}
+				xmlhttp.onreadystatechange=function() {
+					// If the document successfully loaded, display contents
+					if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+						// Display miles form on page
+					   	document.getElementById("content").innerHTML = xmlhttp.responseText;
+					   	console.log('AJAX successful');
+					   	// Load current list to populate drop down menus
+					   	loadCurrentList();
+					}
+					else if (xmlhttp.status==404){
+						console.log('AJAX failed');
+						// Grab content from local storage instead.
+						mainMenu();
+					}
+				}
+				xmlhttp.open("GET","main.html",true);
+				xmlhttp.send();
+			}
+
+
 			function saveContent(content){
+				// Save the current view into storage for a 'back' button to access.
 				localStorage.setItem('content', content);
 			}
+
 			function mainMenu(){
+				// Load the saved view from storage when a 'back' button is pressed
 				document.getElementById("content").innerHTML = localStorage.getItem('content'); 
+				// Re-create the dropdown lists.
 				loadCurrentList();
 			}
 

@@ -1,0 +1,29 @@
+<h2>Current List</h2>
+
+<form name="viewList">
+	<select name="dinnerList">
+	</select>
+</form>
+
+<h2>Add Item to List</h2>
+
+<form name="addItem">
+	<label for="newItem">New Item: </label>
+	<input type="text" name="newItem" required/><br>
+	<button type="button" id="button" onclick="addNewItem()">Add To List</button>
+</form>
+
+<h2>Remove Item from List</h2>
+
+<form name="removeItem">
+	<select name="dinnerList">
+	</select>
+	<button type="button" id="remove" onclick="removeSelectedItem()">Remove Item</button>
+</form>
+
+<h2>What's on the Menu:</h2>
+<p id="error"></p>
+<form name="generateMenu">
+	<button type="button" id="generate" onclick="generateTheMenu()">Generate New Menu</button>
+</form>
+			
