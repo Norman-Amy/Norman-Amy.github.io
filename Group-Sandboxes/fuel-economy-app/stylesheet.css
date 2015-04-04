@@ -8,7 +8,9 @@ body{
     background-size: 500px 600px;
     background-repeat: no-repeat;
         font-family: Georgia, "Times New Roman". serif;
-        text-align: center;}
+        text-align: center;
+        font-size: 1em;
+        }
 
 h1{
     color: #fff;
@@ -17,7 +19,7 @@ h1{
     left: 0px;
     padding: 10px;
     margin: auto;
-    width: 47%;
+    width:630px;
     background-color: #77d2e5;}
 
 content {
@@ -75,7 +77,6 @@ position: absolute;
     height:190px;
     width: 300px;
     background: url("images/fuel.JPG") no-repeat center;
-    border: 1px solid black;
 }
 
 #needle img{
@@ -133,4 +134,11 @@ position: absolute;
     50% { -webkit-transform: translateY(-15px); }
     75% { -webkit-transform: translateY(-10px); }
     100% { -webkit-transform: translateY(0px);  }
+}
+
+
+
+#currentMpg, #averageMpg {
+    font-size: 2em;
+    font-family: garamond, serif;
 }
