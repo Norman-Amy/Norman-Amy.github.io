@@ -63,16 +63,19 @@ position: absolute;
 
 .car_img
 {
+    transition: 2s ease-in-out;
 -webkit-transition: 2s ease-in-out;
 }
 
 .car_img:hover
 {
+    transform: translate(320px,0px);
 -webkit-transform: translate(320px,0px);
 } 
 
 .car_img:active
 {
+    transform: translate(320px,0px);
 -webkit-transform: translate(320px,0px);
 } 
  

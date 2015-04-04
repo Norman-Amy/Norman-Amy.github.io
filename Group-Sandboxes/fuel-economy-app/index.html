@@ -243,9 +243,12 @@
                     }
                 }
                 // Save back to local storage
-                localStorage.setItem('selectedCar', JSON.stringify(selectedCar));
                 localStorage.setItem('dbCars', JSON.stringify(dbCars));
 
+                // Remove selected car and mpg from local storage 
+                localStorage.removeItem('selectedCar');
+                localStorage.removeItem('mpg');
+                
                 // Display results
                 document.getElementById('content').innerHTML = "<h2> Current MPG for " +
                         selectedCar.name + "</h2>" +
