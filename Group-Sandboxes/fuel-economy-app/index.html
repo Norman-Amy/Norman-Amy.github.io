@@ -120,7 +120,6 @@
                 } else {
                     // Display error to select a car (do not call next form)
                     document.getElementById("errors").innerHTML = "<p> An error occurred: Please select a car </p>";
-                    document.getElementById("errors").style.color = "black";
                 }
             }
             // This function will grab the miles form and display it on the screen
@@ -153,7 +152,6 @@
                 if (isNaN(miles) || miles === null || miles === undefined || miles <= 0) {
                     // Prompt user to re-input miles
                     document.getElementById("errors").innerHTML = "<p> Invalid miles. Please try again. </p>";
-                    document.getElementById("errors").style.color = "black";
                 } else {
                     // Clear error message if it exists
                     document.getElementById("errors").innerHTML = "";
@@ -193,7 +191,6 @@
                 if (isNaN(gallons) || gallons === null || gallons === undefined || gallons <= 0) {
                     // Prompt user to re-input miles
                     document.getElementById("errors").innerHTML = "<p> Invalid gallons. Please try again. </p>";
-                    document.getElementById("errors").style.color = "black";
                 } else {
                     // Clear error message if it exists
                     document.getElementById("errors").innerHTML = "";
