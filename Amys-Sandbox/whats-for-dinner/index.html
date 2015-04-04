@@ -110,6 +110,16 @@
 				loadCurrentList();
 			}
 
+			function stalling(){
+				//Stall the masses!
+				var content = document.getElementById("content");
+				content.innerHTML = "<h2>Creating Menu...</h2>"
+					+ "<img src='loading.png' alt='loading'/>";
+					
+				setTimeout(function(){
+					generateTheMenu();
+				}, 3000)
+			}
 
 			function generateTheMenu(){
 				// If the list exists, create a menu
@@ -331,7 +341,7 @@
 			<h2>What's on the Menu:</h2>
 			<p id="error"></p>
 			<form name="generateMenu">
-				<button type="button" id="generate" onclick="generateTheMenu()">Generate New Menu</button>
+				<button type="button" id="generate" onclick="stalling()">Generate New Menu</button>
 			</form>
 			
 		</div>
