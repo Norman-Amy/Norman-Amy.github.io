@@ -83,14 +83,14 @@ position: absolute;
     transform: rotate(-95deg);
     left: 50px;
     top: 70px;
-	-webkit-animation: rotate 2.5s cubic-bezier(0, 0, 0.35, 1) infinite;
-	animation: rotate 2.5s cubic-bezier(0, 0, 0.35, 1) infinite;
+/* 	-webkit-animation: rotate 2.5s infinite; */
+	animation: rotate 2.5s infinite;
 }
 
 #needle {
-	-webkit-animation: move-y 2.5s infinite;
+/* 	-webkit-animation: move-y 2.5s infinite; */
 	animation: move-y 2.5s infinite;
-	-webkit-transform-origin: 50% 50%;
+/* 	-webkit-transform-origin: 50% 50%; */
 }
 
 
