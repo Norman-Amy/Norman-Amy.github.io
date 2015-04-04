@@ -180,22 +180,21 @@ input{
     padding: 10px 15px 10px 15px;
 }
 
+
+
 #road
 {
-    position: absolute;
-    z-index:-1;
-bottom: 0;
 width:95%;
 }
 
 .car_img:hover
 {
--webkit-transform: translate(250px,0px);
+-webkit-transform: translate(90%,0px);
 } 
 
 .car_img:active
 {
--webkit-transform: translate(250px,0px);
+-webkit-transform: translate(90%,0px);
 } 
 
 
@@ -224,20 +223,17 @@ input{
 
 #road
 {
-    position: absolute;
-    z-index:-1;
-bottom: 0;
 width:95%;
 }
 
 .car_img:hover
 {
--webkit-transform: translate(250px,0px);
+-webkit-transform: translate(90%,0px);
 } 
 
 .car_img:active
 {
--webkit-transform: translate(250px,0px);
+-webkit-transform: translate(90%,0px);
 } 
 
 
