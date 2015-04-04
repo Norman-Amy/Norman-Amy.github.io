@@ -8,11 +8,13 @@ body {
 }
 
 main {
+	margin: 10px 0;
 	border: 3px dashed red;
+	border-radius: 10px;
 }
 
 #content {
-	border: 1px solid #a3c63c;
+	border: 3px solid yellow;
 	border-radius: 6px;
 	padding: 0 15px 15px 15px;
 }
@@ -23,6 +25,8 @@ header {
 
 h1 {
 	background: orange;
+	margin-top: 0;
+	margin-bottom: 15px;
 	padding: 20px;
 	border-radius: 10px;
 }
