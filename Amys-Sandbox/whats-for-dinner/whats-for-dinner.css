@@ -98,17 +98,17 @@ button:hover{
 	position: relative;
 	left: 5px;
 	margin: auto;
-	width: 205px;
 	transform: skew(3deg, -.5deg);
 	-webkit-transform: skew(3deg, -.5deg);
 	-moz-transform: skew(3deg, -.5deg);
 	-o-transform: skew(3deg, -.5deg);
 	-ms-transform: skew(3deg, -.5deg);
 	box-shadow: -10px 15px 10px #888888;
-	margin-bottom: 15px;
+	margin-bottom: 35px;
 	font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 	text-align:center;
 	top: 15px;
+	display: inline-block;
 }
 
 .table h3, .table h2 {
@@ -117,13 +117,24 @@ button:hover{
 	text-align:center;
 }
 
+table {
+	background: white;
+	border-radius: 5px;
+	padding: 10px;
+	margin: 5px auto;
+}
+
 td {
-	border: thin solid #ddddd7;
-	border-radius: 6px;
-    padding: 6px;
-    min-width:85px;
     background: white;
     font-weight:none;
+}
+
+td:first-child {
+	text-align:right;
+}
+
+td:last-child {
+	text-align: left;
 }
 
 td:hover{
@@ -131,8 +142,9 @@ td:hover{
 	transition: font-weight 1s ease;
 }
 
-button .back {
-	margin: 00px 0;
+.back {
+	display: block;
+	margin: 10px auto;
 }
 
 #add input {
