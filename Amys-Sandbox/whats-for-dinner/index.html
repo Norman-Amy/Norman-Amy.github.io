@@ -150,7 +150,7 @@
 						}
 
 						// Display the menu row by row
-						table += "<tr><td>" + day + "..........." 
+						table += "<tr><td>" + day + "</td><td>...........</td><td>" 
 							+ menu[i] + "</td></tr>";
 						
 					}
@@ -247,14 +247,14 @@
 				saveContent(content.innerHTML);
 				
 				// Create menu
-				var table = "<section class='table'><h2>This Week's Menu</h2>"
+				var table = "<section class='table'><h3>This Week's Menu</h3>"
 					+ "<table class='menu' id='current'>";
 
 				for (var i = 0; i < 7; i++){
 					var day = whatsToday(i);
 
 					// Output rows and columns of table
-					table += "<tr><td>" + day + "..........." + currentMenu[day] + "</td></tr>";
+					table += "<tr><td>" + day + "</td><td>...........</td><td>" + currentMenu[day] + "</td></tr>";
 				}
 
 				table += "</table></section>";
