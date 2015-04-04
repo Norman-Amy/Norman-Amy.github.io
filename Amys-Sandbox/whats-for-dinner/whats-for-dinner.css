@@ -78,10 +78,10 @@ td {
     padding: 6px;
     min-width:85px;
     background: white;
-    font-style:none;
+    font-weight:none;
 }
 
 td:hover{
-	font-style: bold;
-	transition: font-style 2s ease;
+	font-weight: bold;
+	transition: font-weight 1s ease;
 }
