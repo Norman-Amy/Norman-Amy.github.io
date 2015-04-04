@@ -89,17 +89,17 @@ position: absolute;
     transform: rotate(-95deg);
     left: 50px;
     top: 60px;
-    -webkit-animation: rotate 3s infinite linear;
-    animation: rotate 3s infinite linear;
+    -webkit-animation: rotate 3s linear;
+    animation: rotate 3s linear;
 }
 
 #needle {
-    -webkit-animation: move-y 3s infinite linear;
-    animation: move-y 3s infinite linear;
+    -webkit-animation: move-y 3s linear;
+    animation: move-y 3s linear;
 }
 #needleX {
-    -webkit-animation: move-x 3s infinite linear;
-    animation: move-x 3s infinite linear;
+    -webkit-animation: move-x 3s linear;
+    animation: move-x 3s linear;
 }
 
 @-webkit-keyframes rotate {
