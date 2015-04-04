@@ -203,8 +203,8 @@ width:95%;
 }
 
 
-/* For Samsung g5 */
-@media screen 
+ /* For Samsung g5 */
+/*@media screen 
   and (device-width: 360px) 
   and (device-height: 640px) 
   and (-webkit-device-pixel-ratio: 3) 
@@ -243,4 +243,4 @@ width:95%;
 } 
 
 
-}
+} */
