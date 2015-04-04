@@ -8,7 +8,7 @@ body{
     background-size: 500px 600px;
     background-repeat: no-repeat;
         font-family: Georgia, "Times New Roman". serif;
-        text-align: left;}
+        text-align: center;}
 
 h1{
     color: #fff;
@@ -16,7 +16,7 @@ h1{
     top: 0px;
     left: 0px;
     padding: 10px;
-    margin: 0px;
+    margin: auto;
     width: 47%;
     background-color: #77d2e5;}
 
@@ -42,6 +42,7 @@ input.text.focus{
 
 #road
 {
+    margin:auto;
 position: relative;
 height:250px;
 width: 200px;
@@ -51,7 +52,9 @@ width:650px;
 
 
 
-#car { position: absolute; 
+#car { 
+margin:auto;
+position: absolute; 
        bottom:30px; 
        left: 20px; } 
 
@@ -67,23 +70,44 @@ width:650px;
 } 
  
 #fuel {
+    margin:auto;
     position: relative;
-    height:250px;
-    width: 200px;
-    background: url("images/fuel.JPG");
+    height:190px;
+    width: 300px;
+    background: url("images/fuel.JPG") no-repeat center;
+    border: 1px solid black;
+}
+
+#needle img{
+    position: absolute;
+    transform: rotate(-95deg);
+    left: 50px;
+    top: 70px;
+	-webkit-animation: rotate 2.5s cubic-bezier(0, 0, 0.35, 1) infinite;
+	animation: rotate 2.5s cubic-bezier(0, 0, 0.35, 1) infinite;
 }
 
 #needle {
-    position: absolute;
-    transform: rotate(-160deg);
+	-webkit-animation: move-y 2.5s infinite;
+	animation: move-y 2.5s infinite;
+	-webkit-transform-origin: 50% 50%;
 }
 
 
+@keyframes rotate {
+    0% { -webkit-transform: rotate(0deg); }
+   100% { -webkit-transform: rotate(360deg); }
+}
 
-    
 
-
-
-
+@keyframes move-y {
+	0% { -webkit-transform: translateY(); -webkit-animation-timing-function: ease-in; }
+			
+	40% { -webkit-transform: translateY(); -webkit-animation-timing-function: ease-in; }
+	65% { -webkit-transform: translateY(); -webkit-animation-timing-function: ease-in; }
+	82% { -webkit-transform: translateY(); -webkit-animation-timing-function: ease-in; }
+	92% { -webkit-transform: translateY(); -webkit-animation-timing-function: ease-in; }
+}
+   
         
        
