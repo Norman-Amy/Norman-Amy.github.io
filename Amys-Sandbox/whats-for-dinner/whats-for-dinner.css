@@ -68,7 +68,6 @@ h2, h3 {
 input, select {
 	padding: 2px;
 	height: 30px;
-	min-width: 100px;
 	border-radius: 6px;
 }
 
@@ -225,7 +224,7 @@ tr:hover, tr:active {
 		font-size: 1.6em;
 	}
 
-	button, select, input {
+	button, select {
 		font-size: 1em;
 	}
 
@@ -242,14 +241,5 @@ tr:hover, tr:active {
 	.back {
 		font-size: 1.5em;
 	}
-
-
-#add input {
-	transition: width 1.5s ease;
-}
-
-#add input:focus {
-	width: 200px;
-}
 
 }
