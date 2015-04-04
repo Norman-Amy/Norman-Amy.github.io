@@ -150,7 +150,7 @@
 						}
 
 						// Display the menu row by row
-						table += "<tr><td>" + day + "</td><td>" 
+						table += "<tr><td>" + day + "..........." 
 							+ menu[i] + "</td></tr>";
 						
 					}
@@ -158,7 +158,7 @@
 					table += "</table></section>"
 
 					// Add a back button for this view.
-					table += "<button type='button' onclick='loadMainXML()'>"
+					table += "<button type='button' onclick='loadMainXML()' class='back'>"
 						+ "Back</button>";
 
 					document.getElementById('content').innerHTML = table;
@@ -254,12 +254,12 @@
 					var day = whatsToday(i);
 
 					// Output rows and columns of table
-					table += "<tr><td>" + day + "</td><td>" + currentMenu[day] + "</td></tr>";
+					table += "<tr><td>" + day + "..........." + currentMenu[day] + "</td></tr>";
 				}
 
 				table += "</table></section>";
 				
-				table += "<button type='button' onclick='loadMainXML()'>Back</button>";
+				table += "<button type='button' onclick='loadMainXML()' class='back'>Back</button>";
 
 				content.innerHTML = table;
 			}
