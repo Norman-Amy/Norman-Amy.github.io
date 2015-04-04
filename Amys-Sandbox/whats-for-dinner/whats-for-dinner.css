@@ -68,7 +68,7 @@ h2, h3 {
 input, select {
 	padding: 2px;
 	height: 30px;
-	width: 100px;
+	min-width: 100px;
 	border-radius: 6px;
 }
 
@@ -137,9 +137,8 @@ td:last-child {
 	text-align: left;
 }
 
-td:hover{
+tr:hover, tr:active {
 	font-weight: bold;
-	transition: font-weight 1s ease;
 }
 
 .back {
@@ -185,12 +184,67 @@ td:hover{
 
 
 
+
+
+
 /* Generic media query */
 
 @media screen 
   and (min-width: 200px) 
-  and (max-width: 700px) 
+  and (max-width: 800px) 
 {
 
+	body {
+		background: red;
+	}
+
+	h1 {
+		font-size: 3em;
+	}
+	main {
+		width: 90%;
+		background: white;
+
+	}
+
+	#content {
+		padding: 15px;
+	}
+
+	#dinnerplate {
+		float: none;
+		display: block;
+		position: static;
+		margin: 15px auto;
+		width: 40%;
+	}
+
+	#mainMenu {
+		width: 95%;
+		float: none;
+		display: block;
+		border: 1px solid black;
+		position: static;
+		margin: auto;
+		font-size: 1.6em;
+	}
+
+	button, select, input {
+		font-size: 1em;
+	}
+
+	select {
+		height: 50px;
+		min-width: 200px;
+	}
+
+
+	table, .table h3 {
+		font-size: 2em;
+	}
+
+	.back {
+		font-size: 1.5em;
+	}
 
 }
