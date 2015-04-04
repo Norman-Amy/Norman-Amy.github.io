@@ -189,15 +189,8 @@ select {
 width:95%;
 }
 
-.car_img:hover
-{
--webkit-transform: translate(500px,0px);
-} 
-
-.car_img:active
-{
--webkit-transform: translate(500px,0px);
-} 
-
+.car_img{
+    left: 100px;
+}
 
 }
