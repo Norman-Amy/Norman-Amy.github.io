@@ -190,20 +190,5 @@ width:95%;
 }
 
 
-.car_img{
-    left: 100px;
-}
-
-.car_img:hover
-{
--webkit-transform: translate(90%,0px);
-} 
-
-.car_img:active
-{
--webkit-transform: translate(90%,0px);
-} 
-
-
 }
 
