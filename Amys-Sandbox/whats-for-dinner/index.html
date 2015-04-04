@@ -114,8 +114,8 @@
 				//Stall the masses!
 				var content = document.getElementById("content");
 				content.innerHTML = "<h2>Creating Menu...</h2>"
-					+ "<img src='loading.png' alt='loading'/>";
-					
+					+ "<img src='loading.png' alt='loading' id='loading'/>";
+
 				setTimeout(function(){
 					generateTheMenu();
 				}, 3000)

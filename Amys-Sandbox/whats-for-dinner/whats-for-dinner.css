@@ -85,3 +85,12 @@ td:hover{
 	font-weight: bold;
 	transition: font-weight 1s ease;
 }
+
+#add input {
+	transition: width 1.5s ease;
+}
+
+#add input:focus {
+	width: 200px;
+}
+
