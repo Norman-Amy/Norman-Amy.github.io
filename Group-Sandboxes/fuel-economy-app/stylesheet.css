@@ -160,8 +160,7 @@ select {
 
 
 
-
-
+/* Generic media query */
 
 @media screen 
   and (min-width: 200px) 
@@ -203,15 +202,43 @@ width:95%;
 }
 
 
-/* Landscape */
+/* For Samsung g5 */
 @media screen 
   and (device-width: 360px) 
   and (device-height: 640px) 
   and (-webkit-device-pixel-ratio: 3) 
  {
 
-      body{
-          background: red;
-      }
+           body{   
+    font-size: 1.5em;
+}
+
+h1{
+    width:95%;
+}
+
+
+input{
+    padding: 10px 15px 10px 15px;
+}
+
+#road
+{
+    position: absolute;
+    z-index:-1;
+bottom: 0;
+width:95%;
+}
+
+.car_img:hover
+{
+-webkit-transform: translate(250px,0px);
+} 
+
+.car_img:active
+{
+-webkit-transform: translate(250px,0px);
+} 
+
 
 }
