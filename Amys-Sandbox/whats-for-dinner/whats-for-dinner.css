@@ -9,15 +9,25 @@ body {
 
 main {
 	margin: 10px 0;
-	border: 3px dashed red;
+	border: 3px dashed yellow;
 	border-radius: 10px;
 }
 
 #content {
-	border: 3px solid yellow;
-	border-radius: 6px;
+	border: 3px solid red;
+	border-radius: 10px;
 	padding: 0 15px 15px 15px;
 }
+
+#dinnerplate{
+	position: relative;
+	left: 100px;
+	top: 30px;
+	width: 400px;
+	float: left;	
+}
+
+
 
 header {
 	text-align:left;
@@ -32,7 +42,7 @@ h1 {
 }
 
 h2, h3 {
-	padding-top: 10px;
+	margin-top: 10px;
 }
 
 input, select {
@@ -51,7 +61,7 @@ button {
 	min-width: 50px;
 }
 button:hover{
-	background-color: #a3c63c;
+	background-color: orange;
 	color: #000; 
 	-webkit-transition: background color 1.5s ease;
   	-moz-transition: background color 1.5s ease;
@@ -123,6 +133,7 @@ td:hover{
   	-webkit-animation-fill-mode: both;
   	animation-fill-mode: both;
 }
+
 
 .spinner .bounce1 {
   	-webkit-animation-delay: -0.32s;
