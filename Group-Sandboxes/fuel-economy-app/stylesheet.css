@@ -1,0 +1,79 @@
+/*  -----------------------------LAYOUT------------------------------------ */
+head{
+    
+}
+body{
+  
+      
+    background-size: 500px 600px;
+    background-repeat: no-repeat;
+        font-family: Georgia, "Times New Roman". serif;
+        text-align: left;}
+
+h1{
+    color: #fff;
+    position:centered;
+    top: 0px;
+    left: 0px;
+    padding: 10px;
+    margin: 0px;
+    width: 47%;
+    background-color: #77d2e5;}
+
+content {
+    
+}
+
+.header{
+    margin: 40px 0px 20px 0px
+}
+input{
+    padding: 6px 12px 6px 12px;
+    border: 1px solid #665544;
+    color: #050702;}
+input.submit.hover{
+    background-color: #665544;}
+input.submit:active{
+    background-color: chocolate;}
+input.text{
+    color:  chocolate;}
+input.text.focus{
+    color: #665544;}
+
+#road
+{
+position: relative;
+height:250px;
+width: 200px;
+background: url("images/road.JPG");
+width:650px;
+}
+
+
+
+#car { position: absolute; 
+       bottom:30px; 
+       left: 20px; } 
+
+
+.car_img
+{
+-webkit-transition: 2s ease-in-out;
+}
+
+.car_img:hover
+{
+-webkit-transform: translate(320px,0px);
+} 
+ 
+
+
+
+
+    
+
+
+
+
+        
+       
