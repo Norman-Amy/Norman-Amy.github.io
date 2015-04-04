@@ -164,4 +164,8 @@ select {
   and (-webkit-device-pixel-ratio: 3) 
   and (orientation: landscape) {
 
+      body{
+          background: red;
+      }
+
 }
