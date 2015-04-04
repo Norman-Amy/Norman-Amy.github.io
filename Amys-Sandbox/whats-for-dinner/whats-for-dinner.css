@@ -233,7 +233,6 @@ tr:hover, tr:active {
 		width: 95%;
 		float: none;
 		display: block;
-		border: 1px solid black;
 		position: static;
 		margin: auto;
 		font-size: 1.6em;
