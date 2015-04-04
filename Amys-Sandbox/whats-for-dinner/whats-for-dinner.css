@@ -187,21 +187,8 @@ tr:hover, tr:active {
 /* Generic media query */
 
 @media screen 
-  and (min-width: 800px) 
-  and (max-width: 1000px) 
-{
-	body {
-		background: blue;
-	}
-
-}
-
-
-/* Generic media query */
-
-@media screen 
   and (min-width: 200px) 
-  and (max-width: 900px) 
+  and (max-width: 1000px) 
 {
 
 	body {
