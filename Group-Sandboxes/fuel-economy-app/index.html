@@ -226,16 +226,22 @@
                 var selectedCar = JSON.parse(localStorage.getItem('selectedCar'));
                 // Grab inputted miles
                 var mpg = JSON.parse(localStorage.getItem('mpg'));
+                //Get current mpg and round
                 var currentMpg = mpg.miles / mpg.gallons;
+                currentMpg = currentMpg * 100;
+                currentMpg = Math.round(currentMpg) / 100;
+                //Add current mpg to selected car object
                 selectedCar.allMpg.push(currentMpg);
                 var averageMpg = 0;
                 selectedCar.numOfFills += 1;
                 for (var i = 0; i < selectedCar.allMpg.length; i++) {
                     averageMpg += selectedCar.allMpg[i];
                 }
+                //Get average and round 
                 averageMpg /= selectedCar.numOfFills;
                 averageMpg = averageMpg * 100;
                 averageMpg = Math.round(averageMpg) / 100;
+                // Add average mpg to selected car object
                 selectedCar.avgMpg = averageMpg;
                 for (var i = 0; i < dbCars.carNames.length; i++) {
                     if (dbCars.carNames[i].name == selectedCar.name) {
@@ -248,7 +254,7 @@
                 // Remove selected car and mpg from local storage 
                 localStorage.removeItem('selectedCar');
                 localStorage.removeItem('mpg');
-                
+
                 // Display results
                 document.getElementById('content').innerHTML = "<h2> Current MPG for " +
                         selectedCar.name + "</h2>" +
