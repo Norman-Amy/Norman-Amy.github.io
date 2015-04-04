@@ -1,16 +1,30 @@
 body {
 	vertical-align:center;
-	font-family:verdana;
+	font-family: verdana;
 	font-size: 12pt;
-	width: 70%;
+	width: 80%;
 	margin: auto;
 	text-align:center;
+}
+
+main {
+	border: 3px dashed red;
 }
 
 #content {
 	border: 1px solid #a3c63c;
 	border-radius: 6px;
 	padding: 0 15px 15px 15px;
+}
+
+header {
+	text-align:left;
+}
+
+h1 {
+	background: orange;
+	padding: 20px;
+	border-radius: 10px;
 }
 
 h2, h3 {
@@ -42,8 +56,11 @@ button:hover{
   	transition: background color 1.5s ease;
 }
 
-table {
+.table {
+	
+}
 
+table {
 	border: thin solid #d1d0b8;
 	border-radius: 6px;
 	padding: 5px;

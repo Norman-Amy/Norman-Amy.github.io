@@ -133,7 +133,7 @@
 					// Preserve the main menu for if the user hits a "back" button and AJAX doesn work
 					saveContent(content.innerHTML);
 
-					var table = "<h3>New Menu</h3>"
+					var table = "<section class='table'><h3>New Menu</h3>"
 						+ "<table class='menu' id='new'>";
 
 					var list = loadFromStorage();
@@ -157,7 +157,7 @@
 						
 					}
 
-					table += "</table>"
+					table += "</table></section>"
 
 					// Add a back button for this view.
 					table += "<button type='button' onclick='loadMainXML()'>"
@@ -249,7 +249,7 @@
 				saveContent(content.innerHTML);
 				
 				// Create menu
-				var table = "<h2>This week's Menu</h2>"
+				var table = "<section class='table'><h2>This Week's Menu</h2>"
 					+ "<table class='menu' id='current'>";
 
 				for (var i = 0; i < 7; i++){
@@ -259,7 +259,7 @@
 					table += "<tr><td>" + day + "</td><td>" + currentMenu[day] + "</td></tr>";
 				}
 
-				table += "</table>";
+				table += "</table></section>";
 				
 				table += "<button type='button' onclick='loadMainXML()'>Back</button>";
 
