@@ -82,32 +82,55 @@ position: absolute;
     position: absolute;
     transform: rotate(-95deg);
     left: 50px;
-    top: 70px;
-/* 	-webkit-animation: rotate 2.5s infinite; */
-	animation: rotate 2.5s infinite;
+    top: 60px;
+    -webkit-animation: rotate 3s infinite linear;
+    animation: rotate 3s infinite linear;
 }
 
 #needle {
-/* 	-webkit-animation: move-y 2.5s infinite; */
-	animation: move-y 2.5s infinite;
-/* 	-webkit-transform-origin: 50% 50%; */
+    -webkit-animation: move-y 3s infinite linear;
+    animation: move-y 3s infinite linear;
+}
+#needleX {
+    -webkit-animation: move-x 3s infinite linear;
+    animation: move-x 3s infinite linear;
+}
+
+@-webkit-keyframes rotate {
+    0% { -webkit-transform: rotate(-95deg); }
+   100% { -webkit-transform: rotate(5deg); }
 }
 
 
-@keyframes rotate {
-    0% { -webkit-transform: rotate(0deg); }
-   100% { -webkit-transform: rotate(360deg); }
-}
-
-
-@keyframes move-y {
-	0% { -webkit-transform: translateY(); -webkit-animation-timing-function: ease-in; }
-			
-	40% { -webkit-transform: translateY(); -webkit-animation-timing-function: ease-in; }
-	65% { -webkit-transform: translateY(); -webkit-animation-timing-function: ease-in; }
-	82% { -webkit-transform: translateY(); -webkit-animation-timing-function: ease-in; }
-	92% { -webkit-transform: translateY(); -webkit-animation-timing-function: ease-in; }
+@-webkit-keyframes move-x {
+    0% { -webkit-transform: translateX(0px); }
+    100% { -webkit-transform: translateX(140px);  }
 }
    
+@-webkit-keyframes move-y {
+    0% { -webkit-transform: translateY(0px); }
+    25% { -webkit-transform: translateY(-10px); }
+    50% { -webkit-transform: translateY(-15px); }
+    75% { -webkit-transform: translateY(-10px); }
+    100% { -webkit-transform: translateY(0px);  }
+}
         
        
+@keyframes rotate {
+    0% { -webkit-transform: rotate(-95deg); }
+   100% { -webkit-transform: rotate(5deg); }
+}
+
+
+@keyframes move-x {
+    0% { -webkit-transform: translateX(0px); }
+    100% { -webkit-transform: translateX(140px);  }
+}
+   
+@keyframes move-y {
+    0% { -webkit-transform: translateY(0px); }
+    25% { -webkit-transform: translateY(-10px); }
+    50% { -webkit-transform: translateY(-15px); }
+    75% { -webkit-transform: translateY(-10px); }
+    100% { -webkit-transform: translateY(0px);  }
+}
