@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> Mood Tracker App </title>
+		<meta name="Author" content="Amy Norman">
+
+		<link rel="stylesheet" href="who-are-you.css"/>
+		<script type="text/javascript">
+			// Note: AJAX examples only work from the browser. There is a link to a working example in the body below.
+
+
+			function loadScreen2(){
+				var fname = document.getElementById('fname').value;
+				var lname = document.getElementById('lname').value;
+
+				var person = loadPerson(fname, lname);
+				loadHTMLForm(person);
+			}
+
+
+			function loadPerson(fname, lname){
+				var name = combineNames(fname, lname);
+				var person = {
+					first: fname,
+					last: lname
+				};
+
+				//If person doesn't excist, create one, otherwise open the existing one
+				if (!localStorage.getItem(name)){
+					localStorage.setItem(name, JSON.stringify(person));
+				} else {
+					person = JSON.parse(localStorage.getItem(name));
+				}
+
+				return person;
+			}
+
+
+			function combineNames(fname, lname){
+				return fname + " " + lname;
+			}
+
+
+			//Use AJAX to open an HTML form
+			function loadHTMLForm(person){
+
+				var xmlhttp;
+				if (window.XMLHttpRequest){
+					// code for IE7+, Firefox, Chrome, Opera, Safari
+				  	xmlhttp=new XMLHttpRequest();
+				} else {
+					// code for IE6, IE5
+				  	xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+				}
+				xmlhttp.onreadystatechange=function() {
+					if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+				    	document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+
+				    	document.getElementById("fnameMood").value = person.first;
+				    	document.getElementById("lnameMood").value = person.last;
+
+						//Change button
+						document.getElementById("button").innerHTML="Next";
+						document.getElementById("button").onclick=calculate;
+					}
+				};
+				xmlhttp.open("GET","ajax-form.html",true);
+				xmlhttp.send();
+			}
+
+
+			function calculate(){
+				var fname = document.getElementById("fnameMood").value;
+				var lname = document.getElementById("lnameMood").value;
+				var moody = document.getElementById("mood").value;
+				var name = combineNames(fname, lname);
+
+
+				var person = JSON.parse(localStorage.getItem(name));
+
+				//If it exists, save the last mood
+				if (person.mood){
+					person.lastMood = person.mood;
+				}
+
+				// Save the new mood as current
+				person.mood = moody;
+
+				//Save changes to local storage
+				localStorage.setItem(name, JSON.stringify(person));
+
+				var img;
+
+				switch (person.mood)
+				{
+					case "happy":
+						img = "<img src='smiles.png' class='loading' alt='Happy Face'/>";
+						break;
+					case "sad":
+						img = "<img src='sad.png' class='loading' alt='Sad Face'/>";
+						break;
+					case "batman":
+						img = "<img src='batman.png' class='loading' alt='Batman'/>";
+						break;
+				}
+
+				//Change the view to the spinning image
+				document.getElementById("myDiv").innerHTML = img
+					+ "<h2>Calculating...</h2>";
+
+				// Start a timer to finish the program
+				startTimer(person);
+			}
+
+
+			function startTimer(person){
+				//This will load the next screen after 3 seconds
+				setTimeout(function(){loadScreen3(person);}, 3000)
+			}
+
+
+			function loadScreen3(person){
+				var div = document.getElementById("myDiv");
+
+				switch(person.mood)
+				{
+					case "happy":
+						div.innerHTML = "<p>" +
+							"Have a great day, " + person.first + "!</p>";
+						break;
+					case "sad":
+						div.innerHTML = "<p>" +
+							"Don't be sad, " + person.first + "!</p>";
+						break;
+					case "batman":
+						div.innerHTML = "<p>" +
+							"Good to see you, Mr. Wayne.</p>";
+						break;
+				}
+
+				//If they are a returning person, show their previous mood
+				if (person.lastMood){
+					div.innerHTML += "<p> Last time you were here, your mood was: "
+						+ person.lastMood + ". We hope your mood is improving!</p>";
+				}
+			}
+
+		</script>
+	</head>
+	<body>
+		<header>
+			<nav>
+				<a href="http://norman-amy.github.io/" title="Home Page">Home</a> |
+				<a href="http://norman-amy.github.io/apps/CIT261" title="CIT 261">CIT 261 - Web Apps</a> &gt; Mood Tracker App
+			</nav>
+		</header>
+		<h1> Welcome </h1>
+		<div id="myDiv">
+			<h2>What is your name?</h2>
+			<form name="name">
+				<label for="fname">First Name:</label>
+				<input type="text" name="fname" id="fname"/><br/>
+				<label for="lname">Last Name:</label>
+				<input type="text" name="lname" id="lname"/><br/>
+				<button type="button" id="button" onclick="loadScreen2()">Next</button>
+			</form>
+		</div>
+	</body>
+</html>

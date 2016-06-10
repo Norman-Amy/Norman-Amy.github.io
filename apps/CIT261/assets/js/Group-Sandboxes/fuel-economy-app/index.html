@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Fuel Economy Calculator </title>
+
+        <meta name="Author" content="Amy Norman and Crystal Coatney">
+        <meta name="Description" content="This is Team 1's app for CIT 261 - WI15">
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="stylesheet.css" type="text/css" media="screen">
+        <script type="text/javascript">
+
+            // This function will check if any cars exist, if so, create a drop-down menu
+            // Otherwise, display a message that "No cars exist"
+            function loadExistingCars() {
+                // Get cars out of storage
+                var dbCars = loadLocalStorage();
+                // Check to make sure the object returned wasn't empty
+                if (dbCars != undefined && dbCars != null) {
+                    // Loop trough array of cars to create new options for the drop down menu.
+                    // Add default option
+                    var option = document.createElement("OPTION");
+                    // Save option into select
+                    document.chooseCar.car.appendChild(option);
+                    var first = document.chooseCar.car[0];
+                    // Add text
+                    first.innerHTML = "Select a car from below:";
+                    // Add attributes
+                    first.setAttribute("name", "car");
+                    first.setAttribute("value", "");
+                    // Loop through array of cars to populate list
+                    for (var i = 0; i < dbCars.carNames.length; i++) {
+                        // Create option element
+                        var option = document.createElement("OPTION");
+                        // Save option into the parent select element
+                        document.chooseCar.car.appendChild(option);
+                        // Select the current option of the select element (skipping first)
+                        var current = document.chooseCar.car[i + 1];
+                        // Display the car's name
+                        current.innerHTML = dbCars.carNames[i].name;
+                        // Add attributes to the option element
+                        current.setAttribute("name", "car");
+                        current.setAttribute("value", dbCars.carNames[i].name);
+                    }
+                } else {
+                    // Remove select element and display a paragraph with red text as error
+                    document.chooseCar.innerHTML = "<p> No cars exist </p>";
+                    document.chooseCar.style.color = "red";
+                    // Add hidden value for existing car
+                    var input = document.createElement("INPUT");
+                    // Add input to chooseCar form
+                    document.chooseCar.appendChild(input);
+                    // Select the new input
+                    input = document.chooseCar.getElementsByTagName("INPUT")[0];
+                    // Add attribute to represent empty car menu
+                    input.setAttribute("name", "car");
+                    input.setAttribute("value", "");
+                    input.setAttribute("type", "hidden");
+                }
+            }
+            // This function will grab the car object out of local storage
+            // and parse it into a JavaScript object
+            function loadLocalStorage() {
+                return JSON.parse(localStorage.getItem('dbCars'));
+            }
+            // This function will take the car selected from either form.
+            // If a new car was added, save that and add it to list of cars.
+            // If an existing car was selected, save it to local storage.
+            function selectCar() {
+                var newCar = document.addCar.car.value;
+                var existingCar = document.chooseCar.car.value;
+                var dbCars = loadLocalStorage();
+                // Reset error message
+                document.getElementById("errors").innerHTML = "";
+                // Check if the new car was added and existing car was not,
+                // else check if existing car selected and new car was not,
+                // else throw error that none or both were selected.
+                if (newCar != "" && existingCar == "") {
+                    // Check if this is not the first car
+                    if (dbCars != undefined && dbCars != null) {
+                        // Add new car to object
+                        dbCars.carNames.push({name: newCar, avgMpg: 0, allMpg: [], numOfFills: 0});
+                    } else {
+                        // Create a new car object
+                        dbCars = {
+                            carNames: [
+                                {
+                                    name: newCar,
+                                    avgMpg: 0,
+                                    allMpg: [],
+                                    numOfFills: 0
+                                }
+                            ]
+                        };
+                    }
+                    // Save changes to local storage
+                    localStorage.setItem('dbCars', JSON.stringify(dbCars));
+                    // Save new car as selected
+                    localStorage.setItem('selectedCar', JSON.stringify({name: newCar, avgMpg: 0, allMpg: [], numOfFills: 0}));
+                    // Call next form: Miles
+                    loadMilesForm();
+                } else if (newCar == "" && existingCar != "") {
+                    // Loop through array of cars to find existing car
+                    dbCars.carNames.forEach(function(element, index, array) {
+                        // Once the existing car is found, select it.
+                        if (element.name === existingCar) {
+                            var car = {
+                                name: element.name,
+                                avgMpg: element.avgMpg,
+                                allMpg: element.allMpg,
+                                numOfFills: element.numOfFills
+                            };
+                            // Save existing car to localStorage
+                            localStorage.setItem('selectedCar', JSON.stringify(car));
+                        }
+                        ;
+                    });
+
+                    // Call next form: Miles
+                    loadMilesForm();
+                } else {
+                    // Display error to select a car (do not call next form)
+                    document.getElementById("errors").innerHTML = "<p> An error occurred: Please select a car </p>";
+                }
+            }
+            // This function will grab the miles form and display it on the screen
+            function loadMilesForm() {
+                var xmlhttp;
+                if (window.XMLHttpRequest) {
+                    // code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp = new XMLHttpRequest();
+                } else {
+                    // code for IE6, IE5
+                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xmlhttp.onreadystatechange = function() {
+                    // If the document successfully loaded, display contents
+                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                        // Display miles form on page
+                        document.getElementById("content").innerHTML = xmlhttp.responseText;
+                        // Change next button
+                        document.getElementById("next").onclick = saveMiles;
+                    }
+                }
+                xmlhttp.open("GET", "miles.html", true);
+                xmlhttp.send();
+            }
+            // This function will save the inputted miles and then call the next form to load
+            function saveMiles() {
+                // Grab inputted miles
+                var miles = parseInt(document.milesForm.miles.value);
+                // Verify that miles is inputted properly
+                if (isNaN(miles) || miles === null || miles === undefined || miles <= 0) {
+                    // Prompt user to re-input miles
+                    document.getElementById("errors").innerHTML = "<p> Invalid miles. Please try again. </p>";
+                } else {
+                    // Clear error message if it exists
+                    document.getElementById("errors").innerHTML = "";
+                    // Miles are valid. Save in local storage
+                    localStorage.setItem('mpg', JSON.stringify({"miles": miles, "gallons": null}));
+                    // Load next form: Gallons
+                    loadGallonsForm();
+                }
+            }
+            // This is a placeholder function for loading the Gallons form
+            function loadGallonsForm() {
+                var xmlhttp;
+                if (window.XMLHttpRequest) {
+                    // code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp = new XMLHttpRequest();
+                } else {
+                    // code for IE6, IE5
+                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xmlhttp.onreadystatechange = function() {
+                    // If the document successfully loaded, display contents
+                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                        // Display miles form on page
+                        document.getElementById("content").innerHTML = xmlhttp.responseText;
+                        // Change next button
+                        document.getElementById("next").onclick = saveGallons;
+                    }
+                }
+                xmlhttp.open("GET", "gallons.html", true);
+                xmlhttp.send();
+            }
+            // This function will save the inputted gallons and then call the next form to load
+            function saveGallons() {
+                // Grab inputted gallons
+                var gallons = parseInt(document.gallonsForm.gallons.value);
+                // Verify that gallons is inputted properly
+                if (isNaN(gallons) || gallons === null || gallons === undefined || gallons <= 0) {
+                    // Prompt user to re-input miles
+                    document.getElementById("errors").innerHTML = "<p> Invalid gallons. Please try again. </p>";
+                } else {
+                    // Clear error message if it exists
+                    document.getElementById("errors").innerHTML = "";
+                    //Grab exisitng mpg item
+                    var mpg = JSON.parse(localStorage.getItem('mpg'));
+                    // Update gallons
+                    mpg.gallons = gallons;
+                    // Gallons are valid. Save in local storage
+                    localStorage.setItem('mpg', JSON.stringify(mpg));
+                    // Load next view: Calculating
+                    loadCalculatingView();
+                }
+            }
+            // This function will load the "Calculating" screen for 3 seconds then call the display screen
+            function loadCalculatingView() {
+                // Replace the content on the page
+                document.getElementById("content").innerHTML = "<h2> Calculating</h2>"
+                    + "<div id='fuel'><div id='needle'><div id='needleX'><img src='images/needle.png' alt='needle'/></div></div></div>";
+                // Remove next button (no longer needed)
+                var next = document.getElementById('next');
+                next.parentNode.removeChild(next);
+
+                // Start timer for 3 seconds, then load next view: display
+                setTimeout(function() {
+                    displayResults();
+                }, 3000);
+
+            }
+            // This function will calculate and then output the mpg to the screen.
+            function displayResults() {
+                var dbCars = loadLocalStorage();
+                // Get selected car out of storage
+                var selectedCar = JSON.parse(localStorage.getItem('selectedCar'));
+                // Grab inputted miles
+                var mpg = JSON.parse(localStorage.getItem('mpg'));
+                //Get current mpg and round
+                var currentMpg = mpg.miles / mpg.gallons;
+                currentMpg = currentMpg * 100;
+                currentMpg = Math.round(currentMpg) / 100;
+                //Add current mpg to selected car object
+                selectedCar.allMpg.push(currentMpg);
+                var averageMpg = 0;
+                selectedCar.numOfFills += 1;
+                for (var i = 0; i < selectedCar.allMpg.length; i++) {
+                    averageMpg += selectedCar.allMpg[i];
+                }
+                //Get average and round
+                averageMpg /= selectedCar.numOfFills;
+                averageMpg = averageMpg * 100;
+                averageMpg = Math.round(averageMpg) / 100;
+                // Add average mpg to selected car object
+                selectedCar.avgMpg = averageMpg;
+                for (var i = 0; i < dbCars.carNames.length; i++) {
+                    if (dbCars.carNames[i].name == selectedCar.name) {
+                        dbCars.carNames[i] = selectedCar;
+                    }
+                }
+                // Save back to local storage
+                localStorage.setItem('dbCars', JSON.stringify(dbCars));
+
+                // Remove selected car and mpg from local storage
+                localStorage.removeItem('selectedCar');
+                localStorage.removeItem('mpg');
+
+                // Display results
+                document.getElementById('content').innerHTML = "<h2> Current MPG for " +
+                        selectedCar.name + "</h2>" +
+                        "<p id='currentMpg'>" + currentMpg + "</p>" +
+                        "<h2> Average MPG Overall </h2>" +
+                        "<p id='averageMpg'>" + averageMpg + "</p>";
+
+            }
+
+
+
+        </script>
+    </head>
+    <body>
+        <header>
+            <nav>
+                <a href="http://norman-amy.github.io/" title="Home Page">Home</a> |
+                <a href="http://norman-amy.github.io/apps/CIT261" title="CIT 261">CIT 261 - Web Apps</a> &gt; Fuel Economy Calculator
+            </nav>
+        </header>
+        <h1> Fuel Economy Calculator </h1>
+        <div id="errors"></div>
+        <div id="content">
+            <h2> Select Existing Vehicle </h2>
+            <form name="chooseCar">
+                <select name="car">
+
+                </select>
+            </form>
+
+            <h2> Or Add a New Vehicle </h2>
+            <form name="addCar">
+                <input type="text" name="car" value="" />
+            </form>
+        </div>
+         <br>
+        <input type="button" id="next" onclick="selectCar()" value="Next"/>
+        <script type="text/javascript">
+            loadExistingCars();
+        </script>
+        <div id="road">
+            <div id="car">
+                <img src="images/car.png" border="0" class="car_img" />
+            </div>
+        </div>
+
+
+
+    </body>
+</html>

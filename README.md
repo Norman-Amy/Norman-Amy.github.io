@@ -2,8 +2,6 @@
 
 Welcome to Amy's playground!
 
-This repository contains both the code from my sandboxes "Amys-Sandbox" as well as code samples I've recieved and played with from the group under the folder "Group-Sandboxes".     
+Originally I set this up for a class at BYU-Idaho (CIT 261). You can still find my projects for that class here somewhere.
 
-Technologies our group has covered so far:
-* JSON/JavaScript Objects
-* CSS Transitions
+I also use this for testing various things and showing off my skills.
