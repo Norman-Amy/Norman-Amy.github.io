@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+  <title>star-wars WC</title>
+  <meta name="description" content="">
+
+  <!-- Mobile -->
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+
+  <!-- Chrome / Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="black">
+  <link rel="icon" href="icon.png">
+
+  <!-- Safari / iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="apple-touch-icon-precomposed" href="apple-touch-icon.png">
+
+  <link rel="import" href="./star-wars-wc.html">
+</head>
+<body>
+
+  <h1>Star Wars Characters</h1>
+  <select id="personSelected">
+    <option value="luke">Luke Skywalker</option>
+    <option value="leia">Leia Organa</option>
+    <option value="r2">R2-D2</option>
+    <option value="vader">Darth Vader</option>
+    <option value="chew">Chewbacca</option>
+  </select>
+  <button>Show Person</button>
+  <star-wars-wc person="luke"></star-wars-wc>
+
+  <script type="text/javascript">
+    var el = document.querySelector('star-wars-wc');
+    var button = document.querySelector('button');
+    button.addEventListener('click', e => {
+      var val = document.querySelector('select').value;
+      el.setAttribute('person', val);
+    });
+  </script>
+</body>
+</html>

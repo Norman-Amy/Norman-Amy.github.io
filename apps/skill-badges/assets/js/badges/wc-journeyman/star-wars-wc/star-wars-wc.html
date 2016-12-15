@@ -1,0 +1,71 @@
+<template>
+  <style type="text/css">
+    :host {
+      font-size: 14px;
+    }
+    #name {
+      font-size: 32px;
+    }
+    #name.male {
+      color: blue;
+    }
+    #name.female {
+      color: red;
+    }
+  </style>
+  <div id="person">
+    <span id="name"></span><br>
+    Birth: <span id="birth"></span><br>
+    Mass: <span id="mass"></span><br>
+    Height: <span id="height"></span>
+  </div>
+
+</template>
+
+<script type="text/javascript">
+  var querySelector = function(selector) {
+    var script = document._currentScript || document.currentScript;
+    return script.ownerDocument.querySelector(selector);
+  };
+
+  var template = querySelector('template');
+
+  class StarWarsWC extends HTMLDivElement {
+    static get observedAttributes() {
+      return ['person'];
+    }
+
+    createdCallback() {
+      this.createShadowRoot();
+      this.shadowRoot.appendChild(document.importNode(template.content, true));
+      this._fetchCharacter()
+        .then(data => this._updateTemplate(data));
+    }
+
+    attributeChangedCallback() {
+      this._fetchCharacter()
+        .then(data => this._updateTemplate(data));
+    }
+
+    _fetchCharacter() {
+      return fetch(`http://swapi.co/api/people/?search=${this.getAttribute('person')}`)
+        .then(res => res.json());
+    }
+
+    _updateTemplate(data) {
+      if (data && data.results[0]) {
+        var root = this.shadowRoot;
+        root.querySelector('#name').textContent = data.results[0].name;
+        root.querySelector('#name').setAttribute("class", data.results[0].gender);
+        root.querySelector('#birth').textContent = data.results[0].birth_year;
+        root.querySelector('#mass').textContent = data.results[0].mass;
+        root.querySelector('#height').textContent = data.results[0].height;
+      } else {
+        console.log("Invalid search");
+      }
+
+    }
+  };
+
+  document.registerElement('star-wars-wc', StarWarsWC);
+</script>
