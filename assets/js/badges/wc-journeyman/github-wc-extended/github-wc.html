@@ -1,0 +1,134 @@
+<template>
+  <style type="text/css">
+    #gravatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+    }
+    .wrap {
+      display: flex;
+      align-items: center;
+      border: 4px solid #a0a0a0;
+      border-radius: 10px;
+      padding: 10px;
+      text-decoration: none;
+    }
+    .user_info {
+      margin: 0 0 0 10px;
+      color: #000000;
+    }
+  </style>
+  <a id='html_url' class='wrap'>
+    <img id='gravatar'>
+    <h1 class='user_info'>
+      <span id='name'></span> - <small id='username'></small>
+    </h1>
+  </a>
+</template>
+
+<script type="text/javascript">
+  /**
+   * Reference the template tag in this current document when HTML imported
+   * (Contains a fix for the `document.currentScript`/`document._currentScript`
+   * https://github.com/webcomponents/webcomponentsjs#html-imports-documentcurrentscript-doesnt-work-as-expected-)
+   */
+  var querySelector = function(selector) {
+    var script = document._currentScript || document.currentScript;
+    return script.ownerDocument.querySelector(selector);
+  };
+
+  var template = querySelector('template');
+
+  document.registerElement('github-wc',  {
+  extends: 'div',
+  prototype: Object.create(HTMLDivElement.prototype, {
+    createdCallback: {
+      value: function() {
+        this.createShadowRoot();
+        this.shadowRoot.appendChild(document.importNode(template.content, true));
+        this._fetchUser()
+          .then(data => this._updateTemplate(data));
+      }
+    },
+    attributeChangedCallback: {
+      value: function() {
+        this._fetchUser()
+          .then(data => this._updateTemplate(data));
+      }
+    },
+    _fetchUser: {
+      value: function() {
+        return fetch(`https://api.github.com/users/${this.getAttribute('username')}`)
+        .then(res => res.json());
+      }
+    },
+    _updateTemplate: {
+      value: function(data) {
+        var root = this.shadowRoot;
+        root.querySelector('#gravatar').src = data.avatar_url;
+        root.querySelector('#username').textContent = '@' + data.login;
+        root.querySelector('#name').textContent = data.name;
+        var link = root.querySelector('#html_url');
+        link.href = data.html_url;
+      }
+    }
+  })
+});
+</script>
+
+<!--<script>
+  (function(document, HTMLElement) {
+    /**
+     * Reference the template tag in this current document when HTML imported
+     * (Contains a fix for the `document.currentScript`/`document._currentScript`
+     * https://github.com/webcomponents/webcomponentsjs#html-imports-documentcurrentscript-doesnt-work-as-expected-)
+     */
+    var querySelector = function(selector) {
+      var script = document._currentScript || document.currentScript;
+      return script.ownerDocument.querySelector(selector);
+    };
+    var template = querySelector('template');
+    class GithubWC extends HTMLElement {
+      static get observedAttributes() {
+        return ['username'];
+      }
+      get username() {
+        return this.getAttribute('username');
+      }
+      set username(val) {
+        if (val) {
+          this.setAttribute('username', val);
+        } else {
+          this.removeAttribute('username');
+        }
+      }
+      createdCallback() {
+        this.createShadowRoot();
+        this.shadowRoot.appendChild(document.importNode(template.content, true));
+      }
+      attachedCallback() {
+        if (this.username) {
+          this._fetchUser()
+            .then(data => this._updateTemplate(data));
+        }
+      }
+      attributeChangedCallback() {
+        this._fetchUser()
+          .then(data => this._updateTemplate(data));
+      }
+      _fetchUser() {
+        return fetch(`https://api.github.com/users/${this.username}`)
+          .then(res => res.json());
+      }
+      _updateTemplate(data) {
+        var root = this.shadowRoot;
+        root.querySelector('#gravatar').src = data.avatar_url;
+        root.querySelector('#username').textContent = '@' + data.login;
+        root.querySelector('#name').textContent = data.name;
+        var link = root.querySelector('#html_url');
+        link.href = data.html_url;
+      }
+    }
+    document.registerElement('github-wc', GithubWC);
+  })(document, HTMLElement)
+</script>-->
