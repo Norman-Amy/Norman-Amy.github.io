@@ -1,0 +1,17 @@
+{
+  "name": "vulcanize",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-vulcanize": "^6.1.0"
+  },
+  "engines": {
+    "node": "4.x.x"
+  },
+  "scripts": {
+    "postinstall": "bower install; gulp; polymer serve;"
+  }
+}

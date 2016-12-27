@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="/assets/css/index.css">
     <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
 
-    <link rel="import" href="elements/elements.vulcanized.html">
-
+    <!-- <link rel="import" href="elements/elements.vulcanized.html"> -->
+    <link rel="import" href="dist/elements/elements2.html">
     <!-- Mobile -->
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
 
@@ -46,27 +46,27 @@
           <p>In this folder, there is another called <code>elements</code> which contains a couple small Polymer components: <code>color-input.html</code> and <code>color-heading.html</code>.</p>
           <p>Both components were being imported onto <code>elements.html</code> like so:</p>
           <p>
-            <code>&lt;link rel="import" href="color-heading.html"&gt;</code>
-            <code>&lt;link rel="import" href="color-input.html"&gt;</code>
+            <code>&lt;link rel="import" href="color-heading.html"&gt;<br>
+            &lt;link rel="import" href="color-input.html"&gt;</code>
           </p>
           <p>To cut down on the number of network requests, I ran <code>vulcanize elements/elements.html -o elements/elements.vulcanized.html</code> (after running <code>npm install -g vulcanize</code>). This created an <code>elements.vulcanize.html</code> file that contained both of the imported elements as well as the entire Polymer library since both elements import it.</p>
         </article>
         <article>
           <h3>Example of Integrating into Build Pipeline.</h3>
-          <p>Example still to come... (Use on a service perhaps?)</p>
+          <p>Using Gulp, I added vulcanize as a task to the gulpfile which created the <code>dist/elements/elements.html</code> file. Then I added gulp to the postinstall script in the <code>package.json</code> file like so: <code>"postinstall": "bower install; gulp; polymer serve;"</code>. The gulpfile task looks like this: </p>
+          <pre>
+            <code>gulp.task('vulcanize', function() {
+              return gulp.src('elements2/elements2.html')
+                .pipe(vulcanize())
+                .pipe(gulp.dest('dist/elements'));
+            });</code>
+          </pre>
+          <p>To pull the file into this page I use <code>&lt;link rel="import" href="dist/elements/elements.html"&gt;</code></p>
         </article>
       </section>
     </div>
     <div id="background">
       <img src="/assets/img/WavingAndroid.png" alt="Waving Android"/>
     </div>
-    <script type="text/javascript">
-      var el = document.querySelector('.github-wc');
-      var button = document.querySelector('button');
-      button.addEventListener('click', e => {
-        var val = document.querySelector('input').value;
-        el.setAttribute('username', val);
-      });
-    </script>
   </body>
 </html>
