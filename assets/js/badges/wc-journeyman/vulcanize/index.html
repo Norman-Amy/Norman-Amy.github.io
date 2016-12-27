@@ -7,9 +7,9 @@
     <meta name="Author" content="Amy Norman">
 
     <link rel="stylesheet" href="/assets/css/index.css">
-    <script type="text/javascript">
+    <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
 
-    </script>
+    <link rel="import" href="elements/elements.html">
 
     <!-- Mobile -->
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
@@ -37,13 +37,19 @@
       <section>
         <h2>Vulcanize</h2>
         <article>
-          <h3>Example of Vulcanizing a Group of Elements</h3>
-          <p>Example still to come...</p>
-        </article>
-        <article>
           <h3>Example of Inline Importing of Elements</h3>
           <p><code>&lt;link rel="import" href="./github-wc.html"&gt;</code></p>
           <p>This performs a network call for each file imported. To combine network calls into one, run vulcanize on the files.</p>
+        </article>
+        <article>
+          <h3>Example of Vulcanizing a Group of Elements</h3>
+          <p>In this folder, there is another called <code>elements</code> which contains a couple small Polymer components: <code>color-input.html</code> and <code>color-heading.html</code>.</p>
+          <p>Both components were being imported onto <code>elements.html</code> like so:</p>
+          <p>
+            <code>&lt;link rel="import" href="color-heading.html"&gt;</code>
+            <code>&lt;link rel="import" href="color-input.html"&gt;</code>
+          </p>
+          <p>To cut down on the number of network requests, I ran <code>vulcanize elements/elements.html -o elements/elements.vulcanized.html</code> (after running <code>npm install -g vulcanize</code>). This created an <code>elements.vulcanize.html file that contained both of the imported elements as well as the entire Polymer library since both elements import it.</code></p>
         </article>
         <article>
           <h3>Example of Integrating into Build Pipeline.</h3>
