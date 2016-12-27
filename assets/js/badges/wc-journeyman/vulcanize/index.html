@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title> Amy's Sandbox - Skill Badges - WC Journeyman</title>
+    <meta name="Author" content="Amy Norman">
+
+    <link rel="stylesheet" href="/assets/css/index.css">
+    <script type="text/javascript">
+
+    </script>
+
+    <!-- Mobile -->
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+
+    <!-- Chrome / Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="black">
+
+    <!-- Safari / iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  </head>
+  <body>
+    <div id="content">
+      <header>
+        <nav>
+          <a href="http://norman-amy.github.io/" title="Home Page">Home</a> | <a href="http://norman-amy.github.io/assets/js/modules/CIT261/" title="CIT 261">CIT 261 - Web Apps</a> | <a href="http://norman-amy.github.io/assets/js/badges" title="Skill Badges">Skill Badges</a> > <a href="http://norman-amy.github.io/assets/js/badges/wc-journeyman" title="Web Component - Journeyman">Web Component - Journeyman</a> > <a href="http://norman-amy.github.io/assets/js/badges/wc-journeyman/vulcanize/index.html" title="Vulcanize">Vulcanize</a>
+        </nav>
+      </header>
+      <hgroup>
+        <h1>Skill Badges</h1>
+        <h2>Web Component - Journeyman</h2>
+      </hgroup>
+      <section>
+        <h2>Vulcanize</h2>
+        <article>
+          <h3>Example of Vulcanizing a Group of Elements</h3>
+          <p>Example still to come...</p>
+        </article>
+        <article>
+          <h3>Example of Inline Importing of Elements</h3>
+          <p><code>&lt;link rel="import" href="./github-wc.html"&gt;</code></p>
+          <p>This performs a network call for each file imported. To combine network calls into one, run vulcanize on the files.</p>
+        </article>
+        <article>
+          <h3>Example of Integrating into Build Pipeline.</h3>
+          <p>Example still to come... (Use on a service perhaps?)</p>
+        </article>
+      </section>
+    </div>
+    <div id="background">
+      <img src="/assets/img/WavingAndroid.png" alt="Waving Android"/>
+    </div>
+    <script type="text/javascript">
+      var el = document.querySelector('.github-wc');
+      var button = document.querySelector('button');
+      button.addEventListener('click', e => {
+        var val = document.querySelector('input').value;
+        el.setAttribute('username', val);
+      });
+    </script>
+  </body>
+</html>
