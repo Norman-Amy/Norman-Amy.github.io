@@ -50,7 +50,11 @@ h2 {
 }
 
 h3 {
-	padding-left: 30px;
+	padding-left: 15px;
+}
+
+article {
+	margin-top: 35px;
 }
 
 section p {
@@ -59,4 +63,7 @@ section p {
 section#list a {
 	padding-left: 30px;
 }
-
+code {
+	font-size: 14px;
+	background-color: #e1eac5;
+}
