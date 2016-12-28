@@ -37,12 +37,12 @@
         </article>
         <article>
           <h3>What this is about</h3>
-          <p>This is the more performant page that is loading a couple web components. They're small, so it's already really fast. In an incognito window, I tracked the load time (running locally with <code>polymer serve</code>). Here's the results:</p>
+          <p>This is the more performant page that is loading a couple web components. They're small, so it's already really fast. In an incognito window, I tracked the load time (running locally with <code>polymer serve</code>). Here are the results:</p>
           <p>
             <label>Original page with no performance changes:</label><br/>
-            <img src="assets/img/loadTime1.png"/><br/>
+            <img src="assets/img/load-original.png"/><br/>
             <label>New page with performance changes:</label><br/>
-            <img src="assets/img/loadTime2.png"/><br/>
+            <img src="assets/img/load-improved.png"/><br/>
           </p>
           <p>Is isn't a big difference, but when you have many instances of custom components loading on the page, it can start to add up. Using async on imports and scripts, ensuring there's no <code>unresolved</code> attribute on the <code>body</code>, and lazy loading the polyfills are simple things that can be done to improve the performance of a web page.</p>
           <p>Visit the original page <a href="index.html" title="Original Performance Page">here</a>.</p>
