@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title> Amy's Sandbox - Skill Badges - WC Journeyman</title>
+    <meta name="Author" content="Amy Norman">
+
+    <script>
+    //   window.Polymer = window.Polymer || {'dom': 'shadow'};
+    </script>
+    <link rel="import" href="bower_components/polymer/polymer.html">
+    <link rel="stylesheet" href="/assets/css/index.css" async>
+
+    <link rel="import" href="elements/color-heading.html" async>
+    <link rel="import" href="elements/color-input.html" async>
+
+  </head>
+  <body>
+    <div id="content">
+      <header>
+        <nav>
+          <a href="http://norman-amy.github.io/" title="Home Page">Home</a> | <a href="http://norman-amy.github.io/assets/js/modules/CIT261/" title="CIT 261">CIT 261 - Web Apps</a> | <a href="http://norman-amy.github.io/assets/js/badges" title="Skill Badges">Skill Badges</a> > <a href="http://norman-amy.github.io/assets/js/badges/wc-journeyman" title="Web Component - Journeyman">Web Component - Journeyman</a> > <a href="http://norman-amy.github.io/assets/js/badges/wc-journeyman/perf/performance.html" title="Improved Performance">Improved Performance</a>
+        </nav>
+      </header>
+      <hgroup>
+        <h1>Skill Badges</h1>
+        <h2>Web Component - Journeyman</h2>
+      </hgroup>
+      <section>
+        <h2>Performance Test - Improved</h2>
+        <article>
+          <p>
+            <color-heading></color-heading>
+            <color-input></color-input>
+          </p>
+        </article>
+        <article>
+          <h3>What this is about</h3>
+          <p>This is the more performant page that is loading a couple web components. They're small, so it's already really fast. In an incognito window, I tracked the load time (running locally with <code>polymer serve</code>). Here's the results:</p>
+          <p>
+            <label>Original page with no performance changes:</label><br/>
+            <img src="assets/img/loadTime1.png"/><br/>
+            <label>New page with performance changes:</label><br/>
+            <img src="assets/img/loadTime2.png"/><br/>
+          </p>
+          <p>Is isn't a big difference, but when you have many instances of custom components loading on the page, it can start to add up. Using async on imports and scripts, ensuring there's no <code>unresolved</code> attribute on the <code>body</code>, and lazy loading the polyfills are simple things that can be done to improve the performance of a web page.</p>
+          <p>Visit the original page <a href="index.html" title="Original Performance Page">here</a>.</p>
+          <h3>Some other things I learned</h3>
+          <p>I took a lot of notes watching the <a href="https://www.youtube.com/watch?v=Yr84DpNaMfk&feature=youtu.be" title="Polymer Performance Patterns - Youtube.com">Polymer Performance Patterns</a> video. Here are some of the tips and tricks I want to remember:</p>
+          <ul>
+            <li>Be careful when using the <code>async</code> attribute on <code>link</code> and <code>script</code> elements. Sometimes the order in which things load matters, and JS on the page doesn't wait for it to finish loading without a little extra work.</li>
+            <li>FOUC = Flash of Unstyled Content. I've seen this countless times on websites. Removing the <code>unresolved</code> attribute on the <code>body</code> element and having a layout ready to go instantly helps prevent this. I also wasn't aware of the <code>:unresolved</code> psuedo class for when styling the page before load. We should see if we can use that for some of our larger pages.</li>
+            <li>Use the shadow dom as much as possible for improving performance. (If only it was as helpful for testing).</li>
+            <li>Avoid using the <code>"reflectToAttribute"</code> property for Polymer variables/properties. This can decrease performance.</li>
+            <li>When using <code>&lt;template is='dom-if'&gt;</code>, use it where it makes the most difference performance-wise. For example, use a <code>dom-if</code> around custom components, but use a <code>hidden</code> attribute around native HTML elements like <code>span</code>, <code>h3</code>, or <code>div</code>.</li>
+            <li>Http2 push would be a great way to cache our pages in FS and is better than Vulcanize. Has anyone looked into this?</li>
+          </ul>
+        </article>
+      </section>
+    </div>
+    <div id="background">
+      <img src="/assets/img/WavingAndroid.png" alt="Waving Android"/>
+    </div>
+    <script>
+      var webComponentsSupported = (
+            'registerElement' in document &&
+            'import' in document.createElement('link') &&
+            'content' in document.createElement('template')
+            );
+
+      if (!webComponentsSupported) {
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'bower_components/webcomponentsjs/webcomponents-lite.js';
+        script.onload = finishLazyLoading;
+        document.head.appendChild(script);
+      } else {
+        finishLazyLoading();
+      }
+
+      function finishLazyLoading(){
+        console.log("finished!");
+      }
+    </script>
+  </body>
+</html>

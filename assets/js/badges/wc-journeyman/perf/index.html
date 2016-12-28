@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title> Amy's Sandbox - Skill Badges - WC Journeyman</title>
+    <meta name="Author" content="Amy Norman">
+
+    <link rel="stylesheet" href="/assets/css/index.css">
+    <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="elements/color-heading.html">
+    <link rel="import" href="elements/color-input.html">
+
+
+  </head>
+  <body unresolved>
+    <div id="content">
+      <header>
+        <nav>
+          <a href="http://norman-amy.github.io/" title="Home Page">Home</a> | <a href="http://norman-amy.github.io/assets/js/modules/CIT261/" title="CIT 261">CIT 261 - Web Apps</a> | <a href="http://norman-amy.github.io/assets/js/badges" title="Skill Badges">Skill Badges</a> > <a href="http://norman-amy.github.io/assets/js/badges/wc-journeyman" title="Web Component - Journeyman">Web Component - Journeyman</a> > <a href="http://norman-amy.github.io/assets/js/badges/wc-journeyman/perf/index.html" title="Original Performance">Original Performance</a>
+        </nav>
+      </header>
+      <hgroup>
+        <h1>Skill Badges</h1>
+        <h2>Web Component - Journeyman</h2>
+      </hgroup>
+      <section>
+        <h2>Performance Test - Original</h2>
+        <article>
+          <p>
+            <color-heading></color-heading>
+            <color-input></color-input>
+          </p>
+        </article>
+        <article>
+          <h3>What this is about</h3>
+          <p>This is the original page that is loading a couple web components. They're small, so it's already really fast. In an incognito window, I tracked the load time (running locally with <code>polymer serve</code>). Here's the results:</p>
+          <p>
+            <label>Original page with no performance changes:</label><br/>
+            <img src="assets/img/loadTime1.png"/><br/>
+            <label>New page with performance changes:</label><br/>
+            <img src="assets/img/loadTime2.png"/><br/>
+          </p>
+          <p>Is isn't a big difference, but when you have many instances of custom components loading on the page, it can start to add up. Using async on imports and scripts, ensuring there's no <code>unresolved</code> attribute on the <code>body</code>, and lazy loading the polyfills are simple things that can be done to improve the performance of a web page.</p>
+          <p>Visit the improved performance page <a href="performance.html" title="Improved Performance Page">here</a>.</p>
+        </article>
+      </section>
+    </div>
+    <div id="background">
+      <img src="/assets/img/WavingAndroid.png" alt="Waving Android"/>
+    </div>
+  </body>
+</html>

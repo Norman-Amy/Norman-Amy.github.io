@@ -1,0 +1,25 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<dom-module id="color-input">
+  <template>
+    <input id="input" type="color"/>
+    <button id="select">Show Hex</button>
+    <span hidden$="[[!colorHex]]">[[colorHex]]</span>
+  </template>
+  <script>
+    Polymer({
+      is: 'color-input',
+      properties: {
+        colorHex: {
+          type: String,
+          value: ''
+        }
+      },
+      listeners: {
+        'select.tap': 'selectTap'
+      },
+      selectTap: function(e) {
+        this.colorHex = this.$.input.value;
+      }
+    });
+  </script>
+</dom-module>
